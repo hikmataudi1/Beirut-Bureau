@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Request as ServiceRequest; 
-
+use App\Models\Citizen;
 class ServiceRequestController extends Controller
 {
     //used on get with no parameters to show all service requests
@@ -12,28 +12,31 @@ class ServiceRequestController extends Controller
         return response()->json(ServiceRequest::all());
     }
 
-    //used on post to add a service request
-    public function store(Request $request)
-    {
-        //validate data
-        $validated = $request->validate([
-            'citizen_id' => 'required|exists:citizens,id',
-            'type' => 'required|string|max:50',
-            'status' => 'nullable|in:pending,approved,rejected',
-            'submission_date' => 'nullable|date',
-            'completion_date' => 'nullable|date',
+   
 
-        ]);
-        $serviceRequest = ServiceRequest::create([
-            'citizen_id' => $validated['citizen_id'],
-            'type' => $validated['type'],
-            'status' => $validated['status'] ?? 'pending',
-            'submission_date' => now(),
-        ]);
-        return response()->json($serviceRequest, 201);
-    }
+    //store function by kheirallah 
+         public function store(Request $request, $citizenId)
+        {
+            $citizen = Citizen::findOrFail($citizenId);
 
-    //show a specific service request
+            // Only owner can create their own request
+            // if ($request->user()->id !== $citizen->user_id) {
+            //     return response()->json(['message' => 'Unauthorized'], 403);
+            // }
+
+            $validated = $request->validate([
+                'type' => 'required|string|max:50',
+            ]);
+
+            $newRequest = ServiceRequest::create([
+                'citizen_id' => $citizenId, 
+                'type' => $validated['type'],
+                'status' => 'pending',
+
+            ]);
+        }
+
+    //show a specific service request by id of request
     //id corresponds to url params  serviceRequest/'5' <--
         public function show($id)
         {
@@ -60,11 +63,57 @@ class ServiceRequestController extends Controller
         return response()->json(['message' => 'Deleted successfully']);
     }
 
-    //depending on a citizens id get all service requests for rhis citizen
-    public function getByCitizen($citizenId)
+    
+    //get citizen requests by id and filter
+    // was index() by kheirallah now getCitizenRequests() by yehya
+    public function getCitizenRequests(Request $request, $citizenId)
     {
-        $serviceRequests = ServiceRequest::where('citizen_id',$citizenId)->get();
-        return response()->json($serviceRequests);
+        $citizen = Citizen::findOrFail($citizenId);
+
+        // Only owner can view their own requests
+        // if ($request->user()->id !== $citizen->user_id) {
+        //     return response()->json(['message' => 'Unauthorized'], 403);
+        // }
+
+        // Filters: ?status=pending&type=garbage&date=2025-11-24
+        $query = $citizen->requests();
+
+        if ($request->has('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->has('type')) {
+            $query->where('type', $request->type);
+        }
+
+        if ($request->has('date')) {
+            $query->whereDate('submission_date', $request->date);
+        }
+
+        return response()->json($query->orderBy('submission_date', 'desc')->get(), 200);
+    }
+
+    //update status by kheirallah
+      public function updateStatus(Request $request, $requestId)
+    {
+        $req = ServiceRequest::findOrFail($requestId);
+
+        $validated = $request->validate([
+            'status' => 'required|in:pending,approved,rejected'
+        ]);
+
+        $req->status = $validated['status'];
+
+        if ($validated['status'] === 'approved') {
+            $req->completion_date = now();
+        }
+
+        $req->save();
+
+        return response()->json([
+            'message' => 'Request status updated',
+            'request' => $req
+        ], 200);
     }
 }
 
