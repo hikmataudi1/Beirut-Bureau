@@ -23,7 +23,8 @@ Route::post('/login', [CitizenController::class, 'login']);
 //middleware by kheirallah
 //Route::middleware('auth:sanctum')->group(function () {
 
-
+    //kheirallah
+    Route::put('/citizens/update/{citizenId}', [CitizenController::class, 'update']);
     //by yehya
     //service requests routes
     Route::apiResource('serviceRequest', ServiceRequestController::class);
