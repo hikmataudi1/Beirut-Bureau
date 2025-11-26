@@ -78,9 +78,9 @@ class CitizenController extends Controller
         ], 200);
     }
 
-        public function update(Request $request, $id)
+        public function update(Request $request, $citizenId)
     {
-        $citizen = Citizen::findOrFail($id);
+        $citizen = Citizen::findOrFail($citizenId);
 
         // Check: Is the logged-in user allowed to edit this profile?
         // if ($request->user()->id !== $citizen->user_id) {
