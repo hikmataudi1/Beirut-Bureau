@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\ServiceRequestController;
 use App\Http\Controllers\CitizenController;
+use App\Http\Controllers\PermitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,7 @@ Route::post('/login', [CitizenController::class, 'login']);
 
     //kheirallah
     Route::put('/citizens/update/{citizenId}', [CitizenController::class, 'update']);
+    Route::post('/citizens/{id}/permits', [PermitController::class, 'store']);
     //by yehya
     //service requests routes
     Route::apiResource('serviceRequest', ServiceRequestController::class);
