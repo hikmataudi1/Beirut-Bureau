@@ -1,21 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\Models\Request as ServiceRequest; 
+use App\Models\Request as DbRequest; 
 use App\Models\Citizen;
-class ServiceRequestController extends Controller
+use Illuminate\Http\Request;
+
+class RequestController extends Controller
 {
-    //used on get with no parameters to show all service requests
-    public function index()
+    //funcction to get all requests (certificae and services)
+     public function index()
     {
-        return response()->json(ServiceRequest::all());
+        return response()->json(DbRequest::all());
     }
 
-   
-
-    //store function by kheirallah 
-         public function store(Request $request, $citizenId)
+    //store a request
+     public function store(Request $request, $citizenId)
         {
             $citizen = Citizen::findOrFail($citizenId);
 
@@ -28,43 +27,42 @@ class ServiceRequestController extends Controller
                 'type' => 'required|string|max:50',
             ]);
 
-            $newRequest = ServiceRequest::create([
+            $newRequest = DbRequest::create([
                 'citizen_id' => $citizenId, 
                 'type' => $validated['type'],
                 'status' => 'pending',
 
             ]);
         }
-
-    //show a specific service request by id of request
+        
+     //show a specific service request by id of request
     //id corresponds to url params  serviceRequest/'5' <--
         public function show($id)
         {
-            $serviceRequest = ServiceRequest::find($id);
-            if (!$serviceRequest) return response()->json(['message' => 'Not found'], 404);
-            return response()->json($serviceRequest);
+            $request = DbRequest::find($id);
+            if (!$request) return response()->json(['message' => 'Not found'], 404);
+            return response()->json($request);
         }   
 
     //update a specific request.
     public function update(Request $request, $id)
     {
-        $serviceRequest = ServiceRequest::find($id);
-        if (!$serviceRequest) return response()->json(['message' => 'Not found'], 404);
-        $serviceRequest->update($request->all());
-        return response()->json($serviceRequest);
+        $request = DbRequest::find($id);
+        if (!$request) return response()->json(['message' => 'Not found'], 404);
+        $request->update($request->all());
+        return response()->json($request);
     }
 
     //delete a specific request
     public function destroy($id)
     {
-        $serviceRequest = ServiceRequest::find($id);
-        if (!$serviceRequest) return response()->json(['message' => 'Not found'], 404);
-        $serviceRequest->delete();
+        $request = DbRequest::find($id);
+        if (!$request) return response()->json(['message' => 'Not found'], 404);
+        $request->delete();
         return response()->json(['message' => 'Deleted successfully']);
     }
 
-    
-    //get citizen requests by id and filter
+     //get citizen requests by id and filter
     // was index() by kheirallah now getCitizenRequests() by yehya
     public function getCitizenRequests(Request $request, $citizenId)
     {
@@ -94,9 +92,9 @@ class ServiceRequestController extends Controller
     }
 
     //update status by kheirallah
-      public function updateStatus(Request $request, $requestId)
+    public function updateStatus(Request $request, $requestId)
     {
-        $req = ServiceRequest::findOrFail($requestId);
+        $req = DbRequest::findOrFail($requestId);
 
         $validated = $request->validate([
             'status' => 'required|in:pending,approved,rejected'
@@ -115,5 +113,5 @@ class ServiceRequestController extends Controller
             'request' => $req
         ], 200);
     }
-}
 
+}
