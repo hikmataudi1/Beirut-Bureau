@@ -17,10 +17,13 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
+     protected $fillable = [
         'name',
         'email',
+        'role',
+        'department_id',
         'password',
+        'status',
     ];
 
     /**
@@ -44,5 +47,29 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+     // One-to-one: A user can have one citizen profile
+    public function citizen()
+    {
+        return $this->hasOne(Citizen::class);
+    }
+
+    // One-to-one: A user can be an employee
+    public function employee()
+    {
+        return $this->hasOne(Employee::class);
+    }
+
+    // One-to-many: A user can upload many documents
+    public function documents()
+    {
+        return $this->hasMany(Document::class, 'uploaded_by');
+    }
+
+    // Optional: Belongs to department
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 }

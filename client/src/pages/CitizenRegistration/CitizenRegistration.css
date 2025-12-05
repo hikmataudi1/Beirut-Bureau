@@ -1,0 +1,112 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.div_main{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background-image: url("../img/mappa.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+.div_main::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.03); 
+    z-index: 2;
+}
+
+
+.div_main > * {
+    position: relative;
+    z-index: 2;
+}
+
+.form-container{
+    background-color:#f4e3b2 ;
+    padding: 20px ;
+    border-radius: 3%;
+    width: 400px;
+    height:100% ;
+    margin: 30px;
+
+}
+
+.header{
+    font-size: 16 px;
+    font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:#74070e ;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:10px;
+
+}
+
+.label{
+    font-size: 10 px;
+    color:#74070e ;
+    font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+.input_form{
+    background-color:#f3ebd4 ;
+    border: none;
+    border-radius:  8px;
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #947268;
+    font-size: 1rem;
+    box-shadow: 0 0 5px #947268;
+    padding-bottom: 7px;
+}
+
+.input_form:focus {
+    border-color: #74070e;       
+    box-shadow: 0 0 5px rgba(116, 7, 14, 0.5);
+    outline: none;
+    
+}
+.button{
+    color:#f3ebd4 ;
+    background-color:#74070e;
+    border: none;
+    font-size: 1rem;
+    box-shadow: 0 0 5px #947268;
+    width: 30%;
+    border-radius: 10%;
+}
+
+.err{
+    font-size: 1rem;
+    color:#310e10 ;
+    font-weight: bold;
+    background-color: rgba(116, 7, 14, 0.356);
+    width: auto; 
+    border-radius:  8px;
+    padding: 3px;
+    padding-right:3px ;
+}
+.Login{
+    color:#310e10 ;
+    font-size: 16 px;
+    font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.Login:hover{
+    color:#947268 ;
+}
