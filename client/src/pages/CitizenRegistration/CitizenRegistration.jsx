@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./CitizenRegistration.css";
 
-
+const  url = "http://localhost:8000/api";
 function CitizenRegistration() {
 
 const navigate = useNavigate();
@@ -21,14 +21,12 @@ const schema = yup.object({
         .matches(/^[0-9]+$/, "The phone number must contain only digits")
         .min(8, 'Phone number must be at least 8 digits')
         .required('Contact number is required'),
-    confirmPassword: yup.string()
-        .oneOf([yup.ref('password'), null], 'The passwords do not match')
-        .required('Please confirm your password'),
-    user_id: yup.string().required('User id is required'),
+    // confirmPassword: yup.string()
+    //     .oneOf([yup.ref('password'), null], 'The passwords do not match')
+    //     .required('Please confirm your password'),
     national_id: yup.string().required('National id is required'),
 
-    // ⭐ NEW DOB FIELD ⭐
-    dob: yup
+    date_of_birth: yup
         .date()
         .typeError("Date of birth must be a valid date")
         .required("Date of birth is required")
@@ -57,7 +55,7 @@ const { register, handleSubmit, formState: { errors } } = useForm({
 
 // Submit handler 
 const onSubmit = (data) => {
-    axios.post('/citizens', data)
+    axios.post(url+'/citizens', data)
         .then(res => {
             toast.success('Registration Successful! Redirecting ....');
             setTimeout(() => navigate('/login'), 2000);
@@ -71,20 +69,42 @@ return (
         <div className='form-container'>
             <h2 className="header">Registration</h2>
             
-            <form onSubmit={handleSubmit(onSubmit)} className="form">
-
-                <div>
-                    <label className="label" >User id</label><br/>
+            <form onSubmit={handleSubmit(onSubmit)} className="form_Registration">
+<div className='div_'>
+            <div>
+                    <label className="label" >User name</label><br/>
                     <input 
-                        type="number"
-                        {...register("user_id")}
+                        type="text"
+                        {...register("name")}
                         className="input_form"
-                        placeholder="1234"
+                        placeholder="you name"
                     />
-                    {errors.user_id && <p className="err">{errors.user_id.message}</p>}
-                </div>
+                    {errors.name && <p className="err">{errors.name.message}</p>}
+            </div>
 
-                <div>
+            <div>
+            <label className="label">Email Address</label><br/>
+            <input
+                className="input_form" 
+                type="email"
+                {...register("email")}
+                placeholder="example@gmail.com"
+            />
+            {errors.email&&<p className="err">{errors.email?.message}</p>}
+            </div>
+
+            <div>
+            <label className="label">password</label><br/>
+            <input 
+                className="input_form" 
+                type="password"
+                {...register("password")}
+                placeholder="********"
+            />
+            {errors.password&&<p className="err">{errors.password?.message}</p>}
+            </div>
+
+            <div>
                     <label className="label" >National id</label><br/>
                     <input 
                         type="text"
@@ -93,9 +113,10 @@ return (
                         placeholder="11223344"
                     />
                     {errors.national_id && <p className="err">{errors.national_id.message}</p>}
-                </div>
-
-                <div>
+            </div>
+</div>
+<div className='div_'>
+            <div>
                     <label className="label" >Phone Number</label><br/>
                     <input 
                         type="tel"
@@ -104,20 +125,19 @@ return (
                         placeholder="70123456"
                     />
                     {errors.contact && <p className="err">{errors.contact.message}</p>}
-                </div>
+            </div>
 
-                {/* ⭐ NEW DOB FIELD ⭐ */}
-                <div>
+            <div>
                     <label className="label">Date of Birth</label><br/>
                     <input 
                         type="date"
-                        {...register("dob")}
+                        {...register("date_of_birth")}
                         className="input_form"
                     />
-                    {errors.dob && <p className="err">{errors.dob.message}</p>}
-                </div>
+                    {errors.date_of_birth && <p className="err">{errors.date_of_birth.message}</p>}
+            </div>
 
-                <div>
+            <div>
                     <label className="label">Address</label><br/>
                     <input 
                         type="text"
@@ -125,16 +145,15 @@ return (
                         className="input_form"
                         placeholder="Address"
                     />
-                </div>
-
+            </div>
+            <div className='div_2'>
                 <button type="submit" className="button">
-                    Register Citizen
+                    Register 
                 </button>
-
+            </div>
+</div>
             </form>
         </div>
     </div>
 );
-}
-
-export default CitizenRegistration;
+}export default CitizenRegistration;

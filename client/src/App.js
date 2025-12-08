@@ -1,11 +1,11 @@
 import logo from './logo.svg';
-import CitizenRegistration from './pages/CitizenRegistration';
+import CitizenRegistration from './pages/CitizenRegistration/CitizenRegistration';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import Profile from './pages/Profile';
-import CertificateRequestsPage from './pages/CertificateRequestsPage';
-import NewRequest from './pages/newRequest'
-import Viewrequest from './pages/Viewrequest'
+import CertificateRequestsPage from './pages/CertificateRequestsPage/CertificateRequestsPage';
+import NewRequest from './pages/newRequest/newRequest'
+import Viewrequest from './pages/Viewrequest/Viewrequest'
+import Login from './pages/login/login'
 
 
 
@@ -16,8 +16,7 @@ function App() {
       <Toaster />
       <Routes>
         <Route path="/" element={<CitizenRegistration />} />
-        {/* <Route path="/login" element={<LoginPage />} /> */}
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<Login/>} />
         <Route path="/Request" element={<CertificateRequestsPage/>}/>
         <Route path='/newRequest'element={<NewRequest/>}/>
         <Route path='/Viewrequest/:id'element={<Viewrequest/>}/>
