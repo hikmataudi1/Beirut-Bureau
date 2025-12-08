@@ -37,13 +37,8 @@ class CitizenController extends Controller
             'contact' => $validated['contact'] ?? null,
             'date_of_birth' => $validated['date_of_birth'] ?? null,
         ]);
-
-        // 4. Create token for frontend
-       // $token = $user->createToken('auth_token')->plainTextToken;
-
         return response()->json([
             'message' => 'Citizen registered successfully',
-            //'token' => $token,
             'user' => $user,
             'citizen' => $citizen
         ], 201);
@@ -73,7 +68,7 @@ class CitizenController extends Controller
         return response()->json([
             'message' => 'Login successful',
             //'token' => $token,
-            'user' => $user,
+            'role' => $user->role,
             'citizen' => $user->citizen
         ], 200);
     }
