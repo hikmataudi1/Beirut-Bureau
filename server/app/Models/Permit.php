@@ -23,4 +23,9 @@ class Permit extends Model
     {
         return $this->belongsTo(Citizen::class, 'applicant_id');
     }
+    public function citizen()
+    {
+        return $this->belongsTo(Citizen::class, 'applicant_id');
+    }
+
 }
