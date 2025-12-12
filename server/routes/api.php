@@ -17,8 +17,6 @@ Route::post('/citizens', [CitizenController::class, 'store']);
 //login citizen
 Route::post('/login', [CitizenController::class, 'login']);
 
-Route::post('/citizens/{id}/permits', [PermitController::class, 'store']);
-
 
 
 
@@ -26,7 +24,13 @@ Route::post('/citizens/{id}/permits', [PermitController::class, 'store']);
 //Route::middleware('auth:sanctum')->group(function () {
 
     //kheirallah
-    Route::put('/citizens/update/{citizenId}', [CitizenController::class, 'update']);
+        Route::put('/citizens/update/{citizenId}', [CitizenController::class, 'update']);
+        //permit routes
+        Route::post('/citizens/{id}/permits', [PermitController::class, 'store']);
+        Route::get('/citizens/{id}/permits', [PermitController::class, 'getCitizenPermits']);
+        Route::put('/admin/permits/{id}', [PermitController::class, 'decide']);
+        Route::get('/admin/permits/pending', [PermitController::class, 'getPending']);
+
     //by yehya
     //service requests routes
     Route::apiResource('request', RequestController::class);
