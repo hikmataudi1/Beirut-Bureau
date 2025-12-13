@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import mockRequests from "../api/mockData/requests.json";
+// import mockRequests from "../api/mockData/requests.json";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./CertificateRequestsPage.css"; 
+// import "./CertificateRequestsPage.css"; 
 
 function CertificateRequestsPage(){
 
@@ -31,7 +31,7 @@ function CertificateRequestsPage(){
     // Load mock data directly
 
     useEffect (()=>{
-        setRequests(mockRequests);
+        // setRequests(mockRequests);
     },[]);
 
     return (
