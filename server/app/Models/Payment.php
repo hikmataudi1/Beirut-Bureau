@@ -14,6 +14,9 @@ class Payment extends Model
         'status',
     ];
 
+    protected $casts = [
+        'date' => 'datetime',
+    ];
     public function citizen()
     {
         return $this->belongsTo(Citizen::class);
