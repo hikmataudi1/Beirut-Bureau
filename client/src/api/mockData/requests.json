@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "request_number": "REQ-2025-00123",
+    "certificate_type": "Residency",
+    "status": "Pending",
+    "submitted_at": "2025-11-26"
+  },
+  {
+    "id": 2,
+    "request_number": "REQ-2025-00124",
+    "certificate_type": "Birth",
+    "status": "Approved",
+    "submitted_at": "2025-10-10"
+  },
+  {
+    "id": 3,
+    "request_number": "REQ-2025-00125",
+    "certificate_type": "Death",
+    "status": "Rejected",
+    "submitted_at": "2025-09-15"
+  },
+  {
+    "id": 4,
+    "request_number": "REQ-2025-00126",
+    "certificate_type": "Marriage",
+    "status": "Pending",
+    "submitted_at": "2025-11-01"
+  }
+]
