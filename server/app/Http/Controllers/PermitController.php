@@ -65,4 +65,93 @@ class PermitController extends Controller
             'permit' => $permit
         ], 201);
     }
+    //Get all permits for a specific citizen
+    public function getCitizenPermits(Request $request, $citizenId)
+    {
+        $citizen = Citizen::findOrFail($citizenId);
+
+        // If authentication enabled later:
+        // if ($request->user()->id !== $citizen->user_id) {
+        //     return response()->json(['message' => 'Unauthorized'], 403);
+        // }
+
+        $permits = $citizen->permits()
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json([
+            'citizen' => [
+                'id' => $citizen->id,
+                'name' => $citizen->user->name,
+                'email' => $citizen->user->email,
+                'contact' => $citizen->contact,
+            ],
+            'permits' => $permits
+        ], 200);
+    }
+
+
+
+    //admin approves or rejects a permit
+     public function decide(Request $request, $permitId)
+    {
+        //fina baaden nzid reason for rejection
+        
+        // If authentication enabled later:
+        // if ($request->user()->role !== 'admin') {
+        //     return response()->json(['message' => 'Unauthorized'], 403);
+        // }
+        $validated = $request->validate([
+            'status' => 'required|in:accepted,rejected',
+            // 'reason' => 'nullable|string|max:255'
+        ]);
+
+        $permit = Permit::findOrFail($permitId);
+
+        if ($validated['status'] === 'accepted') {
+            $permit->status = 'approved';
+            // $permit->rejection_reason = null;
+        } else {
+            $permit->status = 'rejected';
+            // $permit->rejection_reason = $validated['reason'] ?? null;
+        }
+
+        $permit->save();
+
+        return response()->json([
+            'message' => 'Permit decision updated successfully',
+            'permit' => $permit
+        ], 200);
+    }
+    // ADMIN: Get all pending permits
+    public function getPending(Request $request)
+    {
+        // If authentication enabled later:
+        // if ($request->user()->role !== 'admin') {
+        //     return response()->json(['message' => 'Unauthorized'], 403);
+        // }
+
+        $permits = Permit::where('status', 'pending')
+            ->with(['citizen.user'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $result = $permits->map(function ($permit) {
+            return [
+                'permit_id' => $permit->id,
+                'type' => $permit->type,
+                'submitted_data' => $permit->related_documents,
+                'submitted_at' => $permit->created_at,
+
+                'applicant' => [
+                    'citizen_id' => $permit->citizen->id,
+                    'name' => $permit->citizen->user->name,
+                    'contact' => $permit->citizen->contact,
+                    'email' => $permit->citizen->user->email,
+                ]
+            ];
+        });
+
+        return response()->json($result, 200);
+    }
 }

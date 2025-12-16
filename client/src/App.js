@@ -20,7 +20,9 @@ function App() {
     <div className="app-content">
       <Toaster />
       <Routes>
-        <Route path="/" element={<CitizenRegistration />} />
+
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<CitizenRegistration />} />
         <Route path="/login" element={<Login/>} />
         <Route path="/Request" element={<CertificateRequestsPage/>}/>
         <Route path='/newRequest'element={<NewRequest/>}/>
