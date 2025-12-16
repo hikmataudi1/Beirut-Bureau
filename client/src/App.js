@@ -6,13 +6,18 @@ import CertificateRequestsPage from './pages/CertificateRequestsPage/Certificate
 import NewRequest from './pages/newRequest/newRequest'
 import Viewrequest from './pages/Viewrequest/Viewrequest'
 import Login from './pages/login/login'
+import Sidebar from './components/Sidebar';
+import './App.css';
 
 
 
 function App() {
   return (
-
+    <>
+    
     <BrowserRouter>
+    <Sidebar />
+    <div className="app-content">
       <Toaster />
       <Routes>
         <Route path="/" element={<CitizenRegistration />} />
@@ -21,7 +26,9 @@ function App() {
         <Route path='/newRequest'element={<NewRequest/>}/>
         <Route path='/Viewrequest/:id'element={<Viewrequest/>}/>
       </Routes>
+      </div>
     </BrowserRouter>
+    </>
 
   );
 }
