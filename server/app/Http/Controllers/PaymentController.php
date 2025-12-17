@@ -12,7 +12,7 @@ class PaymentController extends Controller
     {
         $citizen = Citizen::findOrFail($citizenId);
 
-        // 🔒 Authentication check (COMMENTED FOR NOW)
+        // Authentication check
         // if ($request->user()->id !== $citizen->user_id) {
         //     return response()->json(['message' => 'Unauthorized'], 403);
         // }
@@ -25,36 +25,38 @@ class PaymentController extends Controller
         ], 200);
     }
 
+    
+
         public function pay(Request $request)
     {
         $validated = $request->validate([
             'paymentId' => 'required|integer',
-            'userId'    => 'required|integer'
+            'citizen_id'    => 'required|integer'
         ]);
 
         $payment = Payment::findOrFail($validated['paymentId']);
 
-        // 🔒 Authentication check (COMMENTED FOR NOW)
+        // 🔒 Authentication check
         // if ($request->user()->id !== $payment->citizen->user_id) {
         //     return response()->json(['message' => 'Unauthorized'], 403);
         // }
 
         // Validate that payment belongs to the user
-        if ($payment->citizen_id != $validated['userId']) {
+        if ($payment->citizen_id != $validated['citizen_id']) {
             return response()->json([
                 'message' => 'User is not allowed to pay this tax'
             ], 403);
         }
 
         // If already paid
-        if ($payment->status === 'paid') {
+        if ($payment->status === 'completed') {
             return response()->json([
                 'message' => 'Payment already completed'
             ], 409);
         }
 
         // Apply payment
-        $payment->status = 'paid';
+        $payment->status = 'completed';
         $payment->payment_date = now();
         $payment->save();
 
@@ -69,12 +71,12 @@ class PaymentController extends Controller
     {
         $payment = Payment::with(['citizen.user'])->findOrFail($paymentId);
 
-        // 🔒 Authentication check (COMMENTED FOR NOW)
+        // 🔒 Authentication check
         // if ($request->user()->id !== $payment->citizen->user_id) {
         //     return response()->json(['message' => 'Unauthorized'], 403);
         // }
 
-        if ($payment->status !== 'paid') {
+        if ($payment->status !== 'completed') {
             return response()->json([
                 'message' => 'Cannot generate receipt for unpaid payment'
             ], 400);
