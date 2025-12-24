@@ -110,6 +110,8 @@ class PermitController extends Controller
 
         if ($validated['status'] === 'accepted') {
             $permit->status = 'approved';
+            $permit->issue_date = now();
+            $permit->expiry_date = now()->addYear();
             // $permit->rejection_reason = null;
         } else {
             $permit->status = 'rejected';

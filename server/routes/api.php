@@ -2,6 +2,7 @@
 use App\Http\Controllers\CitizenController;
 use App\Http\Controllers\PermitController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,17 +31,20 @@ Route::post('/login', [CitizenController::class, 'login']);
         Route::get('/citizens/{id}/permits', [PermitController::class, 'getCitizenPermits']);
         Route::put('/admin/permits/{id}', [PermitController::class, 'decide']);
         Route::get('/admin/permits/pending', [PermitController::class, 'getPending']);
+        //request routes
+        Route::get('/request/citizen/{citizenId}', [RequestController::class, 'getCitizenRequests']);
+        Route::post('/request/{citizenId}', [RequestController::class, 'store']);
+        Route::put('/request/status/{id}', [RequestController::class, 'updateStatus']);
+        // Payments routes
+        Route::get('/property-tax/{citizenId}', [PaymentController::class, 'getPropertyTax']);
+        Route::post('/property-tax/pay', [PaymentController::class, 'pay']);
+        Route::post('/payments/{paymentId}', [PaymentController::class, 'generateReceipt']);
+
 
     //by yehya
     //service requests routes
     Route::apiResource('request', RequestController::class);
     //Route::get('/serviceRequest/citizen/{citizenId}',[ServiceRequestController::class,'getByCitizen'] );
-
-
-    //for merging
-    Route::get('/request/citizen/{citizenId}', [RequestController::class, 'getCitizenRequests']);
-    Route::post('/request/{citizenId}', [RequestController::class, 'store']);
-    Route::put('/request/status/{id}', [RequestController::class, 'updateStatus']);
 
   
 //});
