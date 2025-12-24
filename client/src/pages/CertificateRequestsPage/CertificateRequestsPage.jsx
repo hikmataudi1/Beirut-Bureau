@@ -1,19 +1,20 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import mockRequests from "../../api/mockData/requests.json";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext"; 
 import "./CertificateRequestsPage.css"; 
 const  url = "http://localhost:8000/api";
 function CertificateRequestsPage(){
-
+      const { user, token, login, logout } = useAuth();
     const navigate = useNavigate();
-
+    
+const  url = "http://localhost:8000/api";
 
 
     const  newrequest=()=>{
         navigate("/newRequest");
-    }
+    } 
 
 
     //get Request from db
@@ -21,19 +22,18 @@ function CertificateRequestsPage(){
     const [requests, setRequests] = useState([]);
 
     
-    // useEffect (()=>{
-    // axios.get(url+`/serviceRequest/citizen/${citizenId}`)
-    // .then(res=>setRequests(res.data))
-    // .catch(err=>console.error(err));
-    // }, []);
+    useEffect (()=>{
+        if(user!==null){
+            axios.get(url+`/request/citizen/${user.citizenId}`)
+            .then(res=>setRequests(res.data))
+            .catch(err=>console.error(err));
+              
+        }
+      
+    }, [user]);
     
 
-    // Load mock data directly
-
-    useEffect (()=>{
-        setRequests(mockRequests);
-    },[]);
-
+   
     return (
         <>
         <div className="_main_div">
@@ -51,10 +51,10 @@ function CertificateRequestsPage(){
     <tbody className="tale_body">
     {requests.map(r => (
     <tr key={r.id} className="table_row">
-        <td className="table_cell">{r.request_number}</td>
-        <td className="table_cell">{r.certificate_type}</td>
+        <td className="table_cell">{r.id}</td>
+        <td className="table_cell">{r.type}</td>
         <td className="table_cell">{r.status}</td>
-        <td className="table_cell">{r.submitted_at}</td>
+        <td className="table_cell">{r.submission_date}</td>
         <td className="table_cell"><button className="button_view" onClick={() => navigate(url+`/Viewrequest/${r.id}`)}>View</button></td>
     </tr>
     ))}
