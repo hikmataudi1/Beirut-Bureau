@@ -47,5 +47,8 @@ Route::post('/login', [CitizenController::class, 'login']);
     Route::apiResource('request', RequestController::class);
     //Route::get('/serviceRequest/citizen/{citizenId}',[ServiceRequestController::class,'getByCitizen'] );
 
-  
+     //by yehya
+    //hr employees management
+    //get all employees
+    Route::apiResource('employees', EmployeeController::class);
 //});
