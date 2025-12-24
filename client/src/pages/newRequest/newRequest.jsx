@@ -1,87 +1,61 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from 'axios';
+import axios from "axios";
+import { useAuth } from "../../context/AuthContext";
+import "./NewRequest.css";
 
 const schema = yup.object({
-    certificateType: yup.string().required("Certificate type is required"),
-    fullName: yup.string().required("Full Name is required"),
-    nationalId: yup.string().required("National ID is required"),
-}).required();
+  type: yup.string().required("Type is required"),
+  requestType: yup.string().required("Request type is required"),
+});
 
 function NewRequest() {
-    const [files, setFiles] = useState([]);
+  const { user } = useAuth();
+const  url = "http://localhost:8000/api";
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(schema)
-    });
-
-    const handleFileChange = (e) => {
-        setFiles(e.target.files);
-    };
-
-    const onSubmit = async (data) => {
-    try {
-        const formData = new FormData();
-        formData.append("certificateType", data.certificateType);
-        formData.append("fullName", data.fullName);
-        formData.append("nationalId", data.nationalId);
-        formData.append("eventDate", data.eventDate || "");
-        formData.append("notes", data.notes || "");
-
-        Array.from(files).forEach(file => {
-        formData.append("documents[]", file);
-        });
-
-        console.log("Submitting form with files:", formData);
-
-
-        // axios 
-        const response = await axios.post('/api/certificates', formData, {
-        headers: {
-        'Content-Type': 'multipart/form-data', },
-        });
-
+  const onSubmit = async (data) => {
+    if (!user) return;
+    let formattedData = {
+        type:data.requestType,
+    }
+    console.log(formattedData);
+       axios.post(url+`/request/${user.citizenId}`,formattedData).then(res => console.log(res))
+      .catch(err =>console.log(err));
     
-        console.log('Server response:', response.data);
-        alert('Request submitted successfully!');
-    }catch (error) {
-    console.error('Submission failed:', error);
-    alert('Failed to submit request. Check console for details.');
-    }}
+  };
 
-
-
-    return (
+  return (
     <form onSubmit={handleSubmit(onSubmit)}>
-        <label>certificate Type</label>
-        <select {...register("certificateType")}>
-        <option value="">Select certificate</option>
-        <option value="residency">Residency</option>
-        <option value="birth">Birth</option>
-        <option value="death">Death</option>
-        <option value="marriage">Marriage</option>
-        </select>
-        <p>{errors.certificateType?.message}</p>
+      <label>Type</label>
+      <select {...register("type")}>
+        <option value="">Select type</option>
+        <option value="certificate">Certificate</option>
+        <option value="service">Service</option>
+      </select>
+      {errors.type && <span className="error">{errors.type.message}</span>}
 
-        <label>Full Name</label>
-        <input type="text" {...register("fullName")} placeholder="Full Name" />
-        <p>{errors.fullName?.message}</p>
+      <label>Request Type</label>
+      <input
+        type="text"
+        {...register("requestType")}
+        placeholder="e.g. Birth certificate, Residency proof"
+      />
+      {errors.requestType && (
+        <span className="error">{errors.requestType.message}</span>
+      )}
 
-        <label>National ID</label>
-        <input type="text" {...register("nationalId")} placeholder="National ID" />
-        <p>{errors.nationalId?.message}</p>
-
-        <label>Notes</label>
-        <input type="date" {...register("eventDate")} />
-        <textarea {...register("notes")} rows="3" placeholder="Notes"></textarea>
-
-        <input type="file" onChange={handleFileChange} multiple />
-
-        <button type="submit">Submit Request</button>
+      <button type="submit">Submit Request</button>
     </form>
-    );
+  );
 }
 
 export default NewRequest;

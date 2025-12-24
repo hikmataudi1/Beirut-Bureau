@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
 import "./login.css"
-import { useAuth } from "../../context/AuthContext"; 
+    import { useAuth } from "../../context/AuthContext"; 
 
 const  url = "http://localhost:8000/api";
 function Login(){
@@ -18,7 +18,7 @@ function Login(){
         password:yup.string().required(""),
     }).required("");
 
-
+ 
     const {register ,handleSubmit ,formState:{errors}}=useForm(
             {resolver:yupResolver(schema)});
 
@@ -27,6 +27,7 @@ function Login(){
         .then(res => {
             let user = {
                 id: res.data.citizen.user_id,
+                citizenId : res.data.citizen.id,
                 role:res.data.role
             }
             login(user,null);
