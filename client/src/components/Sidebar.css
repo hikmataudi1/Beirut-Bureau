@@ -1,0 +1,96 @@
+@import '../theme.css';
+.sidebar {
+    width: 260px;
+    background-color: #2E567F;   
+    color: #F7F9FC ;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 10px #a4c2df;
+}
+
+
+.sidebar-header h4 {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    color: #F7F9FC;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    /* gap: 12px; */
+}
+
+.sidebar-menu a,
+.sidebar-footer a {
+    text-decoration: none;
+    color: #F7F9FC;
+    font-size: 15px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    transition: 0.2s ease;
+}
+
+.sidebar-menu a:hover,
+.sidebar-footer a:hover {
+    background-color: #1e3a56; 
+    color: #a4c2df;
+}
+
+.sidebar-footer {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 10px; */
+    margin-bottom: 20px;
+}
+
+.user-box {
+    font-size: 14px;
+    padding: 8px 10px;
+    background: #2E567F;
+    border-radius: 6px;
+}
+
+.logout-btn {
+    padding: 10px 12px;
+    background-color: #a4c2df;
+    border: none;
+    color: #F7F9FC;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.logout-btn:hover {
+    background-color: #8099b0;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+        padding: 15px;
+    }
+
+    .sidebar-menu a {
+        font-size: 14px;
+    }
+}
+
+
+.sidebar-menu a,
+.sidebar-footer a,
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}

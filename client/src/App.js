@@ -8,6 +8,7 @@ import Viewrequest from './pages/Viewrequest/Viewrequest'
 import Login from './pages/login/login'
 import Sidebar from './components/Sidebar';
 import './App.css';
+import PropertyTax from './pages/PropertyTax/PropertyTax'
 
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/Request" element={<CertificateRequestsPage/>}/>
         <Route path='/newRequest'element={<NewRequest/>}/>
         <Route path='/Viewrequest/:id'element={<Viewrequest/>}/>
+        <Route path='/billing'element={<PropertyTax/>}/>
       </Routes>
       </div>
     </BrowserRouter>
