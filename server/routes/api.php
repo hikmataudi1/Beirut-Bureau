@@ -39,6 +39,7 @@ Route::post('/login', [CitizenController::class, 'login']);
         Route::get('/property-tax/{citizenId}', [PaymentController::class, 'getPropertyTax']);
         Route::post('/property-tax/pay', [PaymentController::class, 'pay']);
         Route::post('/payments/{paymentId}', [PaymentController::class, 'generateReceipt']);
+        Route::post('/admin/property-tax', [PaymentController::class, 'storePropertyTax']);
 
 
     //by yehya

@@ -8,6 +8,36 @@ use App\Models\Citizen;
 
 class PaymentController extends Controller
 {
+    public function storePropertyTax(Request $request)
+    {
+        // Admin authentication check (COMMENTED FOR NOW)
+        // if ($request->user()->role !== 'admin') {
+        //     return response()->json(['message' => 'Unauthorized'], 403);
+        // }
+
+        $validated = $request->validate([
+            'citizen_id'   => 'required|integer|exists:citizens,id',
+            'amount'       => 'required|numeric|min:0',
+            'payment_type' => 'required|string|max:50',
+        ]);
+
+        // Create an "unpaid" payment record
+        $payment = Payment::create([
+            'citizen_id'    => $validated['citizen_id'],
+            'amount'        => $validated['amount'],
+            'payment_type'  => $validated['payment_type'],
+            'status'        => 'pending',
+            'date'  => now(), 
+        ]);
+
+        return response()->json([
+            'message' => 'Property tax record created successfully',
+            'payment' => $payment
+        ], 201);
+    }
+
+
+
     public function getPropertyTax($citizenId)
     {
         $citizen = Citizen::findOrFail($citizenId);
@@ -57,13 +87,13 @@ class PaymentController extends Controller
 
         // Apply payment
         $payment->status = 'completed';
-        $payment->payment_date = now();
+        $payment->date = now();
         $payment->save();
 
         return response()->json([
             'status'     => 'SUCCESS',
             'paymentId'  => $payment->id,
-            'paidAt'     => $payment->payment_date,
+            'paidAt'     => $payment->date,
         ], 200);
     }
 
