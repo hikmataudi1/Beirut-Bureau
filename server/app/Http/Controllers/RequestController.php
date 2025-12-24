@@ -61,6 +61,7 @@ class RequestController extends Controller
         $request->delete();
         return response()->json(['message' => 'Deleted successfully']);
     }
+        
 
      //get citizen requests by id and filter
     // was index() by kheirallah now getCitizenRequests() by yehya

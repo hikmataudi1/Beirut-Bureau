@@ -2,6 +2,7 @@
 use App\Http\Controllers\CitizenController;
 use App\Http\Controllers\PermitController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,7 @@ Route::post('/citizens', [CitizenController::class, 'store']);
 //login citizen
 Route::post('/login', [CitizenController::class, 'login']);
 
-
+ 
 
 
 //middleware by kheirallah
@@ -41,6 +42,11 @@ Route::post('/login', [CitizenController::class, 'login']);
     Route::get('/request/citizen/{citizenId}', [RequestController::class, 'getCitizenRequests']);
     Route::post('/request/{citizenId}', [RequestController::class, 'store']);
     Route::put('/request/status/{id}', [RequestController::class, 'updateStatus']);
+
+    //by yehya
+    //hr employees management
+    //get all employees
+    Route::apiResource('employees', EmployeeController::class);
 
   
 //});

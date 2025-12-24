@@ -24,7 +24,7 @@ class PermitController extends Controller
         ]);
 
         //Dynamic validation based on permit TYPE
-        $requiredFields = [
+        $requiredFields = [ 
 
             // Business permit
             'business' => ['business_name','location','owner_name'],
