@@ -3,6 +3,8 @@ use App\Http\Controllers\CitizenController;
 use App\Http\Controllers\PermitController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\DepartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +42,16 @@ Route::post('/login', [CitizenController::class, 'login']);
         Route::post('/property-tax/pay', [PaymentController::class, 'pay']);
         Route::post('/payments/{paymentId}', [PaymentController::class, 'generateReceipt']);
         Route::post('/admin/property-tax', [PaymentController::class, 'storePropertyTax']);
-
+        //project routes
+        Route::post('/admin/projects', [ProjectController::class, 'store']);
+        Route::put('/admin/projects/{id}', [ProjectController::class, 'update']);
+        Route::put('/admin/projects/{id}/status', [ProjectController::class, 'updateStatus']);
+        Route::get('/projects', [ProjectController::class, 'index']);
+        // Departments routes
+        Route::post('/admin/departments', [DepartmentController::class, 'store']);
+        Route::put('/admin/departments/{id}', [DepartmentController::class, 'update']);
+        Route::get('/departments', [DepartmentController::class, 'index']);
+        Route::get('/departments/{id}', [DepartmentController::class, 'show']);
 
     //by yehya
     //service requests routes
