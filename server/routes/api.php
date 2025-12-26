@@ -3,6 +3,7 @@ use App\Http\Controllers\CitizenController;
 use App\Http\Controllers\PermitController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

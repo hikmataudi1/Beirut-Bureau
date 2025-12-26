@@ -6,6 +6,21 @@ import axios from "axios";
 const API_URL = "http://localhost:8000/api";
 
 export default function EditEmployee() {
+
+   const positions = [
+    "Admin",
+    "Mayor",
+    "Municipal Director",
+    "Finance Officer",
+    "Urban Planner",
+    "Project Manager",
+    "HR Manager",
+    "Clerk",
+    "Staff",
+    "Citizen",
+    "Resident",
+  ];
+
   const { id } = useParams();
   const navigate = useNavigate();
   const [form, setForm] = useState({});
@@ -30,12 +45,24 @@ export default function EditEmployee() {
   <h2>Edit Employee</h2>
 
   <form className="form" onSubmit={handleSubmit}>
-    <input
-      name="position"
-      value={form.position || ""}
-      onChange={handleChange}
-      placeholder="Position"
-    />
+      <p>current postion: {form.position}</p>
+
+    <select
+    name="position"
+    value={form.position || ""}
+    onChange={handleChange}
+    required
+  >
+    <option value="">Select Position</option>
+    {positions.map((pos) => (
+      <option key={pos} value={pos}>
+        {pos}
+      </option>
+    ))}
+
+    
+  </select>
+    
     <input
       name="department_id"
       value={form.department_id || ""}

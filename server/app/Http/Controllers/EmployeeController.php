@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -24,13 +25,18 @@ class EmployeeController extends Controller
     {
         $validated = $request->validate([
             'user_id'        => 'required|exists:users,id',
-            'position'       => 'required|string|max:255',
+             'position'      => 'required|in:Admin,Mayor,Municipal Director,Finance Officer,Urban Planner,Project Manager,HR Manager,Clerk,Staff,Citizen,Resident',
             'department_id'  => 'required|exists:departments,id',
             'hire_date'      => 'required|date',
             'salary'         => 'required|numeric|min:0',
         ]);
 
         $employee = Employee::create($validated);
+
+        //add user role
+         $user = User::findOrFail($validated['user_id']);
+        $user->role = $validated['position'];
+        $user->save(); 
 
         return response()->json([
             'message' => 'Employee created successfully',
@@ -58,15 +64,17 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $employee = Employee::findOrFail($id);
+        $user = User::findOrFail($employee->user_id);
 
         $validated = $request->validate([
-            'position'       => 'sometimes|required|string|max:255',
+            'position'      => 'required|in:Admin,Mayor,Municipal Director,Finance Officer,Urban Planner,Project Manager,HR Manager,Clerk,Staff,Citizen,Resident',
             'department_id'  => 'sometimes|required|exists:departments,id',
             'hire_date'      => 'sometimes|required|date',
             'salary'         => 'sometimes|required|numeric|min:0',
         ]);
 
         $employee->update($validated);
+        $user->update(['role' => $validated['position']]);
 
         return response()->json([
             'message' => 'Employee updated successfully',
