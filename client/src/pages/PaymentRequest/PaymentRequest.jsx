@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./PaymentRequest.css";
+import { data } from "react-router-dom";
 
 const API_BASE = "http://localhost:8000/api";
 
@@ -15,7 +16,9 @@ export function PaymentRequest() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios.get(`${API_BASE}/citizens`).then(res => setCitizens(res.data));
+    axios.get(`${API_BASE}/citizens`).then(res => {setCitizens(res.data); console.log(res.data);
+     });
+    
   }, []);
 
   useEffect(() => {
@@ -24,7 +27,7 @@ export function PaymentRequest() {
     } else {
       setFilteredCitizens(
         citizens.filter((c) =>
-          c.name.toLowerCase().includes(searchTerm.toLowerCase())
+          c.user.name.toLowerCase().includes(searchTerm.toLowerCase())
         )
       );
     }
@@ -55,13 +58,13 @@ export function PaymentRequest() {
     setLoading(true);
     try {
       const payload = {
-        paymen_type:type,
+        payment_type:type,
         amount: parseFloat(amount),
         citizen_id: selectAll ? [] : selectedIds,
       };
 
       console.log(payload);
-    //   await axios.post(`${API_BASE}/admin/property-tax`, payload);
+      await axios.post(`${API_BASE}/admin/property-tax`, payload);
       alert(
         `Payment created for ${selectAll ? "All" : selectedIds.length} successfully!`
       );
@@ -131,16 +134,16 @@ export function PaymentRequest() {
                 </thead>
                 <tbody>
                   {filteredCitizens.map((c) => (
-                    <tr key={c.id}>
+                    <tr key={c.user_id}>
                       <td>
                         <input
                           type="checkbox"
-                          checked={selectedIds.includes(c.id)}
-                          onChange={() => handleCheckboxChange(c.id)}
+                          checked={selectedIds.includes(c.user_id)}
+                          onChange={() => handleCheckboxChange(c.user_id)}
                         />
                       </td>
-                      <td>{c.name}</td>
-                      <td>{c.email}</td>
+                      <td>{c.user.name}</td>
+                      <td>{c.user.email}</td>
                     </tr>
                   ))}
                 </tbody>

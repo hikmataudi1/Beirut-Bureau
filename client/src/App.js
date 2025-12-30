@@ -17,6 +17,7 @@ import { CitizenPermitRequest } from './pages/CitizenPermitRequest/CitizenPermit
 import { PaymentReview } from './pages/PaymentReview/PaymentReview';
 import NewRequest from './pages/NewRequest/NewRequest';
 import { PaymentRequest } from './pages/PaymentRequest/PaymentRequest';
+import Viewrequest from './pages/Viewrequest/Viewrequest';
 
 
 import AttendancesDashboard from './pages/AttendancesPage/AttendancesDashboard';
@@ -46,7 +47,7 @@ function App() {
       <Route path="/employees/:id" element={<EmployeeDetails />} />
 
         <Route path='/newRequest'element={<NewRequest/>}/>
-        {/* <Route path='/Viewrequest/:id'element={<Viewrequest/>}/> */}
+        <Route path='/Viewrequest/:id'element={<Viewrequest/>}/>
         <Route path='/permitreview' element={<PermitRequestReview/>}/>
         <Route path='/permitrequest' element={<CitizenPermitRequest/>}/>
         <Route path='/paymentreview' element={<PaymentReview/>}/>

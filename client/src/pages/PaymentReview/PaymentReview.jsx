@@ -8,6 +8,8 @@ const generateReceipt = async (paymentId) => {
   try {
     const response = await axios.get(`${API_BASE}/payments/${paymentId}`);
     const payment = response.data;
+    console.log(payment);
+    
     const doc = new jsPDF();
 
     doc.setFontSize(18);
@@ -18,7 +20,7 @@ const generateReceipt = async (paymentId) => {
     doc.text(`Citizen Name: ${payment.citizen.name}`, 20, 50);
     doc.text(`Citizen Email: ${payment.citizen.email}`, 20, 60);
     doc.text(`Citizen Contact: ${payment.citizen.contact}`, 20, 70);
-    doc.text(`Amount Paid: $${payment.amount.toFixed(2)}`, 20, 80);
+    doc.text(`Amount Paid: $${payment.amount}`, 20, 80);
     doc.text(`Payment Type: ${payment.payment_type}`, 20, 90);
     doc.text(
       `Payment Date: ${payment.paid_at ? new Date(payment.paid_at).toLocaleString() : "-"}`,
@@ -45,7 +47,10 @@ export function PaymentReview() {
     const fetchPropertyTaxes = async () => {
       try {
         const response = await axios.get(`${API_BASE}/property-tax/${userId}`);
+        console.log(response.data.payments[0].status);
         setPropertyTaxes(response.data.payments);
+        console.log(response.data.payments);
+        
       } catch (error) {
         console.error("Error fetching property taxes:", error);
       }
@@ -58,10 +63,9 @@ export function PaymentReview() {
     try {
       const response = await axios.post(`${API_BASE}/property-tax/pay`, {
         paymentId,
-        userId,
+        citizen_id:userId,
       });
 
-      if (response.data.status === "SUCCESS") {
         setPropertyTaxes((prev) =>
           prev.map((tax) =>
             tax.id === paymentId
@@ -73,7 +77,6 @@ export function PaymentReview() {
               : tax
           )
         );
-      }
     } catch (error) {
       console.error("Payment error:", error);
     }
@@ -101,16 +104,16 @@ export function PaymentReview() {
           </tr>
         </thead>
         <tbody>
-          {propertyTaxes.map((tax) => (
+          {propertyTaxes.map((tax) => (            
             <tr key={tax.id}>
-              <td>${tax.amount.toFixed(2)}</td>
+              <td>${tax.amount}</td>
               <td>{tax.payment_type}</td>
               <td>{tax.date ? new Date(tax.date).toLocaleString() : "-"}</td>
-              <td className={tax.status === "PAID" ? "paid" : "unpaid"}>
+              <td className={tax.status === "COMPLETED" ? "paid" : "unpaid"}>
                 {tax.status}
               </td>
               <td>
-                {tax.status === "UNPAID" ? (
+                {tax.status !== "completed" ? (
                   <button className="pay-btn" onClick={() => payTax(tax.id)}>
                     Pay
                   </button>

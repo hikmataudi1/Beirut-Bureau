@@ -69,11 +69,9 @@
 
 /* Table */
 .citizens-table {
-  width: 100%;
   border-collapse: collapse;
   max-height: 500px;
   overflow-y: auto;
-  display: block;
   font-size: 15px;
 }
 
