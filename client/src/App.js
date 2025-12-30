@@ -10,7 +10,12 @@ import AddEmployee from './pages/AddEmployee/AddEmployee';
 import EditEmployee from './pages/EditEmployee/EditEmployee';
 import EmployeeDetails from './pages/EmployeeDetails/EmployeeDetails';
 import "./styles/employee.css";
-  
+
+import { PermitRequestReview } from './pages/CitizenPermitsRequestReview/CitizenRequestReview';
+import { CitizenPermitRequest } from './pages/CitizenPermitRequest/CitizenPermitRequest';
+import { PaymentReview } from './pages/PaymentReview';
+
+
 
 function App() {
   return (
@@ -27,8 +32,11 @@ function App() {
       <Route path="/employees/add" element={<AddEmployee />} />
       <Route path="/employees/edit/:id" element={<EditEmployee />} />
       <Route path="/employees/:id" element={<EmployeeDetails />} />
-
-  
+        <Route path='/newRequest'element={<NewRequest/>}/>
+        <Route path='/Viewrequest/:id'element={<Viewrequest/>}/>
+        <Route path='/permitreview' element={<PermitRequestReview/>}/>
+        <Route path='/permitrequest' element={<CitizenPermitRequest/>}/>
+        <Route path='/paymentreview' element={<PaymentReview/>}/>
       </Routes>
     </BrowserRouter>
 
