@@ -4,109 +4,97 @@ html, body {
     padding: 0;
 }
 .div_main{
-    position: relative;
     display: flex;
     justify-content: center;
-    background-image: url("../img/mappa.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    align-items: center;
+    background-color:#F7F9FC;
+    padding: 10px;
 }
 
-
-
-.div_main::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-
-
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    background: rgba(255, 255, 255, 0.03); 
-    z-index: 2;
-}
-
-
-.div_main > * {
-    position: relative;
-    z-index: 2;
-}
-
-.form-container{
-    background-color:#f4e3b2 ;
-    padding: 20px ;
-    border-radius: 3%;
-    width: 400px;
-    height:100% ;
-    margin: 30px;
-
-}
 
 .header{
-    font-size: 16 px;
+    font-size: 40px;
+    /* align-items: center; */
+    justify-content: center;
     font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color:#74070e ;
+    color:#2E567F ;margin-bottom: 10px;
+    margin-bottom: 10px;
+    display: flex;
 }
 
-.form{
+.form_Registration{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap:10px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px #2E567F;
+
 
 }
 
 .label{
-    font-size: 10 px;
-    color:#74070e ;
-    font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+    font-family:   'Tahoma', Geneva, Verdana, sans-serif;
+    color:#1A1A1A ;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 .input_form{
-    background-color:#f3ebd4 ;
     border: none;
-    border-radius:  8px;
-    width: 90%;
-    padding: 10px;
-    border: 1px solid #947268;
-    font-size: 1rem;
-    box-shadow: 0 0 5px #947268;
-    padding-bottom: 7px;
+    background-color:#F7F9FC;
+    color: #1A1A1A;
+    font-family:   'Tahoma', Geneva, Verdana, sans-serif;
+    box-shadow: 0 0 5px #416c97 ;
+    font-size: 12px; 
+    border-radius: 10px;
+    padding: 7px;
+    width: 100%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+
 }
 
-.input_form:focus {
-    border-color: #74070e;       
-    box-shadow: 0 0 5px rgba(116, 7, 14, 0.5);
-    outline: none;
+
+.button {
+    background-color: #2E567F; 
+    color: white;              
+    width: 100%;              
+    padding: 12px 0;          
     
+    border: none; 
+    border-radius: 8px;       
+    font-size: 16px;         
+    font-weight: bold;         
+    cursor: pointer;
+    margin-top: 15px;          
+    
+    box-shadow: none; 
+    transition: background 0.3s; 
 }
-.button{
-    color:#f3ebd4 ;
-    background-color:#74070e;
-    border: none;
-    font-size: 1rem;
-    box-shadow: 0 0 5px #947268;
-    width: 30%;
-    border-radius: 10%;
+
+
+.button:hover {
+    background-color: #1e3a56; 
 }
+
 
 .err{
-    font-size: 1rem;
-    color:#310e10 ;
-    font-weight: bold;
-    background-color: rgba(116, 7, 14, 0.356);
-    width: auto; 
-    border-radius:  8px;
-    padding: 3px;
-    padding-right:3px ;
+    color: #416c97;
+    font-style: italic;
+    font-family: 'Tahoma', Geneva, Verdana, sans-serif;
+    font-size: 12px;
+    min-height: 18px;
+    display: block;
+    margin-bottom: 5px;
 }
-.Login{
-    color:#310e10 ;
-    font-size: 16 px;
-    font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.div_{
+    min-width: 400px;
+    margin: 4px;
+    padding: 10px;
 }
-.Login:hover{
-    color:#947268 ;
+.div_2 {
+    width: 100%;
+    padding-top: 27px;
+    margin-top: auto; 
+    display: flex;
+    justify-content: center;
 }
