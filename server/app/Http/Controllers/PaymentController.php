@@ -10,31 +10,43 @@ class PaymentController extends Controller
 {
     public function storePropertyTax(Request $request)
     {
-        // Admin authentication check (COMMENTED FOR NOW)
+        //Admin authentication check (COMMENTED FOR NOW)
         // if ($request->user()->role !== 'admin') {
         //     return response()->json(['message' => 'Unauthorized'], 403);
         // }
 
         $validated = $request->validate([
-            'citizen_id'   => 'required|integer|exists:citizens,id',
-            'amount'       => 'required|numeric|min:0',
-            'payment_type' => 'required|string|max:50',
+            'citizen_id'   => 'nullable|array',
+            'amount'        => 'required|numeric|min:0',
+            'payment_type'  => 'required|string|max:50',
         ]);
 
-        // Create an "unpaid" payment record
-        $payment = Payment::create([
-            'citizen_id'    => $validated['citizen_id'],
-            'amount'        => $validated['amount'],
-            'payment_type'  => $validated['payment_type'],
-            'status'        => 'pending',
-            'date'  => now(), 
-        ]);
+        // Decide which citizens to target
+        if (!empty($validated['citizen_id'])) {
+            // Specific citizens
+            $citizenIds = $validated['citizen_id'];
+        } else {
+            // All citizens
+            $citizenIds = Citizen::pluck('id')->toArray();
+        }
+
+        $createdPayments = [];
+
+        foreach ($citizenIds as $citizenId) {
+            $createdPayments[] = Payment::create([
+                'citizen_id'   => $citizenId,
+                'amount'       => $validated['amount'],
+                'payment_type' => $validated['payment_type'],
+                'status'       => 'pending',
+                'date'         => now(),
+            ]);
+        }
 
         return response()->json([
-            'message' => 'Property tax record created successfully',
-            'payment' => $payment
+            'message' => 'Property tax records created successfully',
         ], 201);
     }
+
 
 
 
@@ -50,7 +62,6 @@ class PaymentController extends Controller
         $payments = Payment::where('citizen_id', $citizenId)->get();
 
         return response()->json([
-            'citizen_id' => $citizenId,
             'payments'   => $payments
         ], 200);
     }

@@ -15,6 +15,11 @@ class Project extends Model
         'status',
     ];
 
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date'   => 'date',
+        'budget'     => 'decimal:2',
+    ];
     public function department()
     {
         return $this->belongsTo(Department::class);

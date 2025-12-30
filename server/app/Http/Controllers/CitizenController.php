@@ -97,4 +97,17 @@ class CitizenController extends Controller
             'citizen' => $citizen
         ], 200);
     }
+    public function index()
+    {
+        // 🔒 Admin authentication (COMMENTED FOR NOW)
+        // if ($request->user()->role !== 'admin') {
+        //     return response()->json(['message' => 'Unauthorized'], 403);
+        // }
+
+        $citizens = Citizen::with('user')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json($citizens, 200);
+    }
 }
