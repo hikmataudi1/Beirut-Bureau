@@ -3,7 +3,7 @@ import CitizenRegistration from './pages/CitizenRegistration/CitizenRegistration
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import CertificateRequestsPage from './pages/CertificateRequestsPage/CertificateRequestsPage';
-import NewRequest from './pages/NewRequest/NewRequest'
+
 import Login from './pages/login/login'
 import EmployeeList from './pages/EmployeeList/EmployeeList';
 import AddEmployee from './pages/AddEmployee/AddEmployee';
@@ -13,7 +13,9 @@ import "./styles/employee.css";
 
 import { PermitRequestReview } from './pages/CitizenPermitsRequestReview/CitizenRequestReview';
 import { CitizenPermitRequest } from './pages/CitizenPermitRequest/CitizenPermitRequest';
-import { PaymentReview } from './pages/PaymentReview';
+import { PaymentReview } from './pages/PaymentReview/PaymentReview';
+import NewRequest from './pages/NewRequest/NewRequest';
+import { PaymentRequest } from './pages/PaymentRequest/PaymentRequest';
 
 
 
@@ -33,10 +35,11 @@ function App() {
       <Route path="/employees/edit/:id" element={<EditEmployee />} />
       <Route path="/employees/:id" element={<EmployeeDetails />} />
         <Route path='/newRequest'element={<NewRequest/>}/>
-        <Route path='/Viewrequest/:id'element={<Viewrequest/>}/>
+        {/* <Route path='/Viewrequest/:id'element={<Viewrequest/>}/> */}
         <Route path='/permitreview' element={<PermitRequestReview/>}/>
         <Route path='/permitrequest' element={<CitizenPermitRequest/>}/>
         <Route path='/paymentreview' element={<PaymentReview/>}/>
+        <Route path='/paymentrequest' element={<PaymentRequest/>}/>
       </Routes>
     </BrowserRouter>
 

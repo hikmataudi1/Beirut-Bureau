@@ -11,9 +11,9 @@ const schema = yup.object({
   requestType: yup.string().required("Request type is required"),
 });
 
-function NewRequest() {
+export default function NewRequest() {
   const { user } = useAuth();
-const  url = "http://localhost:8000/api";
+ const  url = "http://localhost:8000/api";
   const {
     register,
     handleSubmit,
@@ -57,5 +57,3 @@ const  url = "http://localhost:8000/api";
     </form>
   );
 }
-
-export default NewRequest;
