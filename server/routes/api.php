@@ -4,11 +4,19 @@ use App\Http\Controllers\PermitController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\EmployeeController;
+
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\TaskController;
+
+use App\Http\Controllers\AttendanceController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\PerformanceOverviewController;
+
+
 
 
 Route::get('/user', function (Request $request) {
@@ -73,4 +81,19 @@ Route::post('/login', [CitizenController::class, 'login']);
     //hr employees management
     //get all employees
     Route::apiResource('employees', EmployeeController::class);
+
+    //by yehya
+    //attendances routes
+
+    Route::get('/attendance', [AttendanceController::class, 'index']);
+    Route::get('/attendance/employee/{id}', [AttendanceController::class, 'employeeAttendance']);
+    Route::post('/attendance/check-in', [AttendanceController::class, 'checkIn']);
+    Route::post('/attendance/check-out', [AttendanceController::class, 'checkOut']);
+    Route::put('/attendance/{id}', [AttendanceController::class, 'update']);
+    Route::delete('/attendance/{id}', [AttendanceController::class, 'destroy']);
+
+    //payroll by yehya
+    Route::get('/payroll', [PayrollController::class, 'index']);
+    Route::post('/payroll/{employee}/calculate', [PayrollController::class, 'calculate']);
+    Route::get('/employee-performance/{id}', [PerformanceOverviewController::class, 'show']);
 //});
