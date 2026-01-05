@@ -39,6 +39,7 @@ Route::post('/login', [CitizenController::class, 'login']);
     //kheirallah
         Route::get('/citizens', [CitizenController::class, 'index']);
         Route::put('/citizens/update/{citizenId}', [CitizenController::class, 'update']);
+        Route::put('/users/{id}/password', [CitizenController::class, 'updatePassword']);
         //permit routes
         Route::post('/citizens/{id}/permits', [PermitController::class, 'store']);
         Route::get('/citizens/{id}/permits', [PermitController::class, 'getCitizenPermits']);

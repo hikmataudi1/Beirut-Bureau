@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Payment;
 use App\Models\Citizen;
+use App\Mail\PaymentSuccessfulMail;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -100,10 +102,10 @@ class PaymentController extends Controller
         $payment->status = 'completed';
         $payment->date = now();
         $payment->save();
-
+        
+        Mail::to($payment->citizen->user->email)->send(new PaymentSuccessfulMail($payment));
         return response()->json([
             'status'     => 'SUCCESS',
-            'paymentId'  => $payment->id,
             'paidAt'     => $payment->date,
         ], 200);
     }
