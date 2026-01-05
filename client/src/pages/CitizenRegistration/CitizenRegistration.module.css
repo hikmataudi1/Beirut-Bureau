@@ -1,0 +1,151 @@
+/* Page Wrapper */
+.divMain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #14172a 0%, #101a33 100%);
+  padding: 24px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Form Card */
+.formContainer {
+  background: #1a2330 !important; /* dark background */
+  padding: 50px 40px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid #2d4a6e;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Header */
+.header {
+  color: #5ba3e8;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+/* Form layout */
+.formRegistration {
+ background: transparent;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.div_ {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.div_2 {
+  grid-column: 1 / -1;
+  margin-top: 12px;
+}
+
+/* Labels */
+.label {
+  color: #e8eef5; /* light label color */
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+padding: 10px;
+  text-transform: uppercase;
+}
+
+/* Inputs */
+.inputForm {
+  width: 100%;
+  padding: 14px 16px;
+  background: #101a33; /* dark input background */
+  border: 1px solid #324e6b;
+  border-radius: 10px;
+  color: #e8eef5; /* input text light */
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+.inputForm::placeholder {
+  color: #7a8893; /* gray placeholder */
+}
+
+.inputForm:focus {
+  border-color: #5ba3e8;
+  box-shadow: 0 0 0 4px rgba(91, 163, 232, 0.2);
+  background: #182231;
+}
+
+/* Error text */
+.err {
+  color: #ff6b6b;
+  font-size: 13px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Buttons */
+.button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #357abd 0%, #4a90e2 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(53, 122, 189, 0.5);
+}
+
+.button:hover {
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(53, 122, 189, 0.6);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(53, 122, 189, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .formRegistration {
+    grid-template-columns: 1fr;
+  }
+
+  .div_2 {
+    margin-top: 20px;
+  }
+
+  .header {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .formContainer {
+    padding: 30px 24px;
+  }
+
+  .button {
+    padding: 14px;
+    font-size: 15px;
+  }
+}

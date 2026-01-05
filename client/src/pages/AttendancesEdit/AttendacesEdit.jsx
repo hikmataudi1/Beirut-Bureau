@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-
+import styles from './AttendancesEdit.module.css';
 const AttendancesEdit = ({ attendance, onSave, onCancel }) => {
   const [checkIn, setCheckIn] = useState(attendance.check_in?.slice(0,5) || "");
   const [checkOut, setCheckOut] = useState(attendance.check_out?.slice(0,5) || "");
@@ -39,21 +39,35 @@ const AttendancesEdit = ({ attendance, onSave, onCancel }) => {
   };
 
   return (
-    <div style={{ position: "fixed", top: 50, left: "50%", transform: "translateX(-50%)", background: "#eee", padding: 20, border: "1px solid black", zIndex: 1000 }}>
-      <h3>Edit Attendance ID: {attendance.id}</h3>
-      <label>
-        Check In:
-        <input type="time" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Check Out:
-        <input type="time" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} />
-      </label>
-      <br /><br />
-      <button onClick={handleSave}>Save</button>
-      <button onClick={onCancel} style={{ marginLeft: 10 }}>Cancel</button>
-    </div>
+
+
+<div className={styles.modal}>
+  <h3>Edit Attendance ID: {attendance.id}</h3>
+
+  <label>
+    Check In:
+    <input
+      type="time"
+      value={checkIn}
+      onChange={(e) => setCheckIn(e.target.value)}
+    />
+  </label>
+
+  <label>
+    Check Out:
+    <input
+      type="time"
+      value={checkOut}
+      onChange={(e) => setCheckOut(e.target.value)}
+    />
+  </label>
+
+  <div>
+    <button className={styles.saveBtn} onClick={handleSave}>Save</button>
+    <button className={styles.cancelBtn} onClick={onCancel}>Cancel</button>
+  </div>
+</div>
+
   );
 };
 

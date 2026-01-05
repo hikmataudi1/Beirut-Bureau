@@ -1,0 +1,140 @@
+/* Page wrapper */
+.dashboard {
+  padding: 30px 200px;
+  color: #e8eef5;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #0d1424;
+  font-family: Arial, sans-serif;
+}
+
+/* Page title */
+.dashboard h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #5ba3e8;
+  margin-bottom: 20px;
+}
+
+/* Controls (select and month input) */
+.controls {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.controls label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.controls select,
+.controls input[type="month"] {
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #1f2937;
+  background: #0f172a;
+  color: #e8eef5;
+  font-size: 14px;
+}
+
+.controls select:focus,
+.controls input[type="month"]:focus {
+  outline: none;
+  border-color: #5ba3e8;
+  box-shadow: 0 0 0 2px rgba(91, 163, 232, 0.25);
+}
+
+/* Charts row */
+.chartsRow {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.chartContainer {
+  background: #111827;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  flex: 1 1 300px;
+  min-width: 280px;
+  color: #e8eef5;
+}
+
+.chartContainer h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #5ba3e8;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Pie chart special sizing */
+.pieChart {
+  height: 300px;
+}
+
+/* Table wrapper */
+.tableContainer {
+  background: #1a2330;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.tableContainer h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #5ba3e8;
+  margin-bottom: 15px;
+}
+
+.tableContainer table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableContainer th {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #5ba3e8;
+  background: #101a33;
+  border-bottom: 1px solid #2d4a6e;
+  text-transform: uppercase;
+}
+
+.tableContainer td {
+  padding: 12px 16px;
+  font-size: 15px;
+  color: #e8eef5;
+  border-bottom: 1px solid #2d4a6e;
+}
+
+.tableContainer tr:hover {
+  background: #182231;
+}
+
+/* Status text in table */
+.tableContainer td.status {
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .chartsRow {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 20px;
+  }
+}

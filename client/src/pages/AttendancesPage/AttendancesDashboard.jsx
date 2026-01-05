@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AttendacesEdit from "../AttendancesEdit/AttendacesEdit";
+  import styles from './AttendancesDashboard.module.css';
 const AttendancesDashboard = () => {
 
   const [attendance, setAttendance] = useState([]);
@@ -78,87 +79,76 @@ const AttendancesDashboard = () => {
   const totalRecords = filteredAttendance.length;
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>HR Attendance Dashboard</h1>
+  
 
-      {/* Filters */}
-      <div style={{ marginBottom: 20 }}>
-        <label>
-          Employee:
-          <select
-            name="employeeId"
-            value={filters.employeeId}
-            onChange={handleFilterChange}
-            style={{ marginLeft: 10 }}
-          >
-            <option value="">All</option>
-            {employees.map((e) => (
-              <option key={e.id} value={e.id}>
-                {e.user?.name || e.name}
-              </option>
-            ))}
-          </select>
-        </label>
+<div className={styles.page}>
+  <h1 className={styles.title}>HR Attendance Dashboard</h1>
 
-        <label style={{ marginLeft: 20 }}>
-          Date:
-          <input
-            type="date"
-            name="date"
-            value={filters.date}
-            onChange={handleFilterChange}
-            style={{ marginLeft: 10 }}
-          />
-        </label>
-      </div>
+  <div className={styles.filters}>
+    <label>
+      Employee:
+      <select
+        name="employeeId"
+        value={filters.employeeId}
+        onChange={handleFilterChange}
+      >
+        <option value="">All</option>
+        {employees.map((e) => (
+          <option key={e.id} value={e.id}>
+            {e.user?.name || e.name}
+          </option>
+        ))}
+      </select>
+    </label>
 
-      {/* Summary */}
-      <div style={{ marginBottom: 20 }}>
-        <strong>Total Records:</strong> {totalRecords} &nbsp;&nbsp;
-        <strong>Total Hours:</strong> {totalHours.toFixed(2)}
-      </div>
+    <label>
+      Date:
+      <input
+        type="date"
+        name="date"
+        value={filters.date}
+        onChange={handleFilterChange}
+      />
+    </label>
+  </div>
 
-      {/* Attendance Table */}
-      <table border="1" cellPadding="5" style={{ width: "100%", borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Employee</th>
-            <th>Date</th>
-            <th>Check In</th>
-            <th>Check Out</th>
-            <th>Hours Worked</th>
-            <th>Actions</th>
+  <div className={styles.tableWrapper}>
+    <table className={styles.table}>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Employee</th>
+          <th>Date</th>
+          <th>Check In</th>
+          <th>Check Out</th>
+          <th>Hours Worked</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {filteredAttendance.map((a) => (
+          <tr key={a.id}>
+            <td>{a.id}</td>
+            <td>{a.employee_name || a.employee?.user?.name}</td>
+            <td>{a.date}</td>
+            <td>{a.check_in}</td>
+            <td>{a.check_out}</td>
+            <td>{a.hours_worked}</td>
+            <td className={styles.actions}>
+              <button className={styles.actionLink} onClick={() => handleEdit(a)}>Edit</button>
+              <button className={styles.deleteBtn} onClick={() => handleDelete(a.id)}>Delete</button>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {filteredAttendance.map((a) => (
-            <tr key={a.id}>
-              <td>{a.id}</td>
-              <td>{a.employee_name || a.employee?.user?.name}</td>
-              <td>{a.date}</td>
-              <td>{a.check_in}</td>
-              <td>{a.check_out}</td>
-              <td>{a.hours_worked}</td>
-              <td>
-                <button onClick={() => handleEdit(a)}>Edit</button>
-                <button onClick={() => handleDelete(a.id)} style={{ marginLeft: 5 }}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-          {filteredAttendance.length === 0 && (
-            <tr>
-              <td colSpan="7" style={{ textAlign: "center" }}>
-                No records found
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-
-      {/* Edit Modal */}
+        ))}
+        {filteredAttendance.length === 0 && (
+          <tr>
+            <td colSpan="7" className={styles.noRecords}>No records found</td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+    {/* Edit Modal */}
       {editRecord && (
         <AttendacesEdit
           attendance={editRecord}
@@ -166,7 +156,9 @@ const AttendancesDashboard = () => {
           onCancel={() => setEditRecord(null)}
         />
       )}
-    </div>
+</div>
+
+
   );
 };
 

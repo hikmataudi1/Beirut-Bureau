@@ -1,7 +1,7 @@
 import { jsPDF } from "jspdf";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import styles from "./PaymentReview.module.css"
 const API_BASE = "http://localhost:8000/api";
 
 const generateReceipt = async (paymentId) => {
@@ -88,49 +88,57 @@ export function PaymentReview() {
   };
 
   return (
-    <div className="payment-container">
-      <h2>Property Tax Payments</h2>
-      <table className="payment-table">
-        <thead>
-          <tr>
-            <th>Amount</th>
-            <th>Payment Type</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {propertyTaxes.map((tax) => (
-            <tr key={tax.id}>
-              <td>${tax.amount.toFixed(2)}</td>
-              <td>{tax.payment_type}</td>
-              <td>{tax.date ? new Date(tax.date).toLocaleString() : "-"}</td>
-              <td className={tax.status === "PAID" ? "paid" : "unpaid"}>
-                {tax.status}
-              </td>
-              <td>
-                {tax.status === "UNPAID" ? (
-                  <button className="pay-btn" onClick={() => payTax(tax.id)}>
-                    Pay
+
+<div className={styles.paymentContainer}>
+  <h2>Property Tax Payments</h2>
+
+  <div className={styles.paymentTableWrapper}>
+    <table className={styles.paymentTable}>
+      <thead>
+        <tr>
+          <th>Amount</th>
+          <th>Payment Type</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {propertyTaxes.map((tax) => (
+          <tr key={tax.id}>
+            <td>${tax.amount.toFixed(2)}</td>
+            <td>{tax.payment_type}</td>
+            <td>{tax.date ? new Date(tax.date).toLocaleString() : "-"}</td>
+            <td className={tax.status === "PAID" ? styles.paid : styles.unpaid}>
+              {tax.status}
+            </td>
+            <td>
+              {tax.status === "UNPAID" ? (
+                <button
+                  className={styles.payBtn}
+                  onClick={() => payTax(tax.id)}
+                >
+                  Pay
+                </button>
+              ) : (
+                <>
+                  <span>PAID</span>
+                  <br />
+                  <button
+                    className={styles.receiptBtn}
+                    onClick={() => generateReceiptTrigger(tax.id)}
+                  >
+                    Generate Receipt
                   </button>
-                ) : (
-                  <>
-                    <span>PAID</span>
-                    <br />
-                    <button
-                      className="receipt-btn"
-                      onClick={() => generateReceiptTrigger(tax.id)}
-                    >
-                      Generate Receipt
-                    </button>
-                  </>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+                </>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
   );
 }

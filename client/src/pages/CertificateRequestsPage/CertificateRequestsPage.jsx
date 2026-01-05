@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext"; 
-import "./CertificateRequestsPage.css"; 
+import styles from './CertificateRequestsPage.module.css';
 const  url = "http://localhost:8000/api";
 function CertificateRequestsPage(){
       const { user, token, login, logout } = useAuth();
@@ -35,36 +35,39 @@ const  url = "http://localhost:8000/api";
 
    
     return (
-        <>
-        <div className="_main_div">
-        <table className="table_Request">
-    <thead>
-        <tr className="table_row">
-            <th className="table_head">Request Number</th>
-            <th className="table_head">Type</th>
-            <th className="table_head">Status</th>
-            <th className="table_head">Date</th>
-            <th className="table_head">Actions</th>
+
+
+<div className={styles.mainDiv}>
+  <div className={styles.tableWrapper}>
+    <table className={styles.table}>
+      <thead>
+        <tr>
+          <th>Request Number</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Date</th>
+          
         </tr>
-    </thead>
+      </thead>
 
-    <tbody className="tale_body">
-    {requests.map(r => (
-    <tr key={r.id} className="table_row">
-        <td className="table_cell">{r.id}</td>
-        <td className="table_cell">{r.type}</td>
-        <td className="table_cell">{r.status}</td>
-        <td className="table_cell">{r.submission_date}</td>
-        <td className="table_cell"><button className="button_view" onClick={() => navigate(url+`/Viewrequest/${r.id}`)}>View</button></td>
-    </tr>
-    ))}
-    </tbody>
+      <tbody>
+        {requests.map((r) => (
+          <tr key={r.id}>
+            <td>{r.id}</td>
+            <td>{r.type}</td>
+            <td>{r.status}</td>
+            <td>{r.submission_date}</td>
+            
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
 
-</table>
-
-        <button onClick={newrequest} className="button_new_request">new Request</button>
-        </div>
-        </>
+  <button className={styles.button_new_request} onClick={newrequest}>
+    New Request
+  </button>
+</div>
 
     )
 

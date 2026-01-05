@@ -1,0 +1,11 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.content {
+  width: 100%;
+  flex: 1;
+  background: transparent;
+  overflow-y: auto;
+}

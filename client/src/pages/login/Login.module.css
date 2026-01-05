@@ -1,0 +1,159 @@
+/* =========================
+   Login Page Wrapper
+========================= */
+
+.mainDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  background: linear-gradient(135deg, #14172a 0%, #101a33 100%);
+  padding: 24px;
+}
+
+/* =========================
+   Login Card
+========================= */
+
+.formLogin {
+  background: linear-gradient(180deg, #1e2837 0%, #1a2330 100%);
+  padding: 40px 36px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 420px;
+
+  border: 1px solid #2d4a6e;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+/* =========================
+   Inputs
+========================= */
+
+.divInput {
+  margin-bottom: 22px;
+}
+
+.label {
+  display: block;
+  color: #e8eef5;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.inputForm {
+  width: 100%;
+  padding: 14px 16px;
+
+  background-color: #0f1419;
+  border: 2px solid #324e6b;
+  border-radius: 8px;
+
+  color: #ffffff;
+  font-size: 15px;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.inputForm::placeholder {
+  color: #7a8893;
+  font-size: 14px;
+}
+
+.inputForm:focus {
+  border-color: #5ba3e8;
+  background-color: #182231;
+  box-shadow: 0 0 0 3px rgba(91, 163, 232, 0.18);
+}
+
+/* Error state */
+.inputForm.error {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.15);
+}
+
+.err {
+  color: #ff6b6b;
+  font-size: 12.5px;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* =========================
+   Button
+========================= */
+
+.button {
+  width: 100%;
+  padding: 14px;
+
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  color: #ffffff;
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-top: 10px;
+
+  box-shadow:
+    0 6px 14px rgba(74, 144, 226, 0.35);
+}
+
+.button:hover {
+  background: linear-gradient(135deg, #3d7ec6 0%, #2b68a5 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(74, 144, 226, 0.45);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================
+   Footer Text
+========================= */
+
+.text {
+  color: #c8d6e5;
+  font-size: 13.5px;
+  text-align: center;
+  margin-top: 22px;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 480px) {
+  .form-login {
+    padding: 30px 24px;
+    border-radius: 12px;
+  }
+
+  .button {
+    padding: 12px;
+    font-size: 14px;
+  }
+}

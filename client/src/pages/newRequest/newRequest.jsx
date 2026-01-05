@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
-import "./NewRequest.css";
+import styles from "./NewRequest.module.css";
 
 const schema = yup.object({
   type: yup.string().required("Type is required"),
@@ -34,26 +34,28 @@ export default function NewRequest() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>Type</label>
-      <select {...register("type")}>
-        <option value="">Select type</option>
-        <option value="certificate">Certificate</option>
-        <option value="service">Service</option>
-      </select>
-      {errors.type && <span className="error">{errors.type.message}</span>}
 
-      <label>Request Type</label>
-      <input
-        type="text"
-        {...register("requestType")}
-        placeholder="e.g. Birth certificate, Residency proof"
-      />
-      {errors.requestType && (
-        <span className="error">{errors.requestType.message}</span>
-      )}
+<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+  <label>Type</label>
+  <select {...register("type")}>
+    <option value="">Select type</option>
+    <option value="certificate">Certificate</option>
+    <option value="service">Service</option>
+  </select>
+  {errors.type && <span className={styles.error}>{errors.type.message}</span>}
 
-      <button type="submit">Submit Request</button>
-    </form>
+  <label>Request Type</label>
+  <input
+    type="text"
+    {...register("requestType")}
+    placeholder="e.g. Birth certificate, Residency proof"
+  />
+  {errors.requestType && (
+    <span className={styles.error}>{errors.requestType.message}</span>
+  )}
+
+  <button type="submit">Submit Request</button>
+</form>
+
   );
 }

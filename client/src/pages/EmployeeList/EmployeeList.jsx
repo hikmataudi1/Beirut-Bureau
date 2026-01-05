@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import styles from "./EmployeeList.module.css";
 
 
 const API_URL = "http://localhost:8000/api";
@@ -24,13 +25,15 @@ export default function EmployeeList() {
   }, []);
 
   return (
-    <div className="page">
-  <h2>Employees</h2>
+   <div className={styles.page}>
+  <h2 className={styles.title}>Employees</h2>
 
-  <a className="btn" href="/employees/add">+ Add Employee</a>
+  <a className={styles.addBtn} href="/employees/add">
+    + Add Employee
+  </a>
 
-  <div className="table-wrapper" style={{ marginTop: "20px" }}>
-    <table>
+  <div className={styles.tableWrapper}>
+    <table className={styles.table}>
       <thead>
         <tr>
           <th>Name</th>
@@ -46,10 +49,25 @@ export default function EmployeeList() {
             <td>{emp.user?.name}</td>
             <td>{emp.position}</td>
             <td>{emp.department?.name}</td>
-            <td className="actions">
-              <a href={`/employees/${emp.id}`}>View</a>
-              <a href={`/employees/edit/${emp.id}`}>Edit</a>
-              <button onClick={() => handleDelete(emp.id)}>Delete</button>
+            <td className={styles.actions}>
+              <a
+                className={styles.actionLink}
+                href={`/employees/${emp.id}`}
+              >
+                View
+              </a>
+              <a
+                className={styles.actionLink}
+                href={`/employees/edit/${emp.id}`}
+              >
+                Edit
+              </a>
+              <button
+                className={styles.deleteBtn}
+                onClick={() => handleDelete(emp.id)}
+              >
+                Delete
+              </button>
             </td>
           </tr>
         ))}
@@ -57,6 +75,7 @@ export default function EmployeeList() {
     </table>
   </div>
 </div>
+
 
   );
 }

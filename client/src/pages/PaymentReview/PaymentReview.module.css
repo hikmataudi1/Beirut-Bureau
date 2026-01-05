@@ -1,0 +1,115 @@
+/* Page wrapper */
+.paymentContainer {
+  padding: 30px 200px;
+  color: #e8eef5;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #0d1424;
+  font-family: Arial, sans-serif;
+}
+
+/* Page title */
+.paymentContainer h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #5ba3e8;
+  margin-bottom: 20px;
+}
+
+/* Table wrapper */
+.paymentTableWrapper {
+  margin-top: 20px;
+  background: #1a2330;
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid #2d4a6e;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  overflow-x: auto;
+}
+
+/* Table */
+.paymentTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Table header */
+.paymentTable th {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+  color: #5ba3e8;
+  background: #101a33;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border-bottom: 1px solid #2d4a6e;
+}
+
+/* Table rows */
+.paymentTable tr {
+  transition: background 0.3s ease;
+}
+
+.paymentTable tbody tr:hover {
+  background: #182231;
+}
+
+/* Table cells */
+.paymentTable td {
+  padding: 14px 16px;
+  font-size: 15px;
+  color: #e8eef5;
+  border-bottom: 1px solid #2d4a6e;
+}
+
+/* Status styles */
+.paid {
+  color: #22c55e; /* green */
+  font-weight: 600;
+}
+
+.unpaid {
+  color: #f87171; /* red */
+  font-weight: 600;
+}
+
+/* Buttons */
+.payBtn,
+.receiptBtn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.payBtn {
+  background: linear-gradient(135deg, #357abd 0%, #4a90e2 100%);
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.payBtn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.receiptBtn {
+  background: linear-gradient(135deg, #10b981 0%, #22c55e 100%);
+  color: #ffffff;
+}
+
+.receiptBtn:hover {
+  background: linear-gradient(135deg, #059669 0%, #16a34a 100%);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .paymentContainer {
+    padding: 20px;
+  }
+}

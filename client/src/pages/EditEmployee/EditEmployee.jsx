@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-
+import styles from "./EditEmployee.module.css"
 
 const API_URL = "http://localhost:8000/api";
 
@@ -41,40 +41,42 @@ export default function EditEmployee() {
   };
 
   return (
-  <div className="page">
-  <h2>Edit Employee</h2>
 
-  <form className="form" onSubmit={handleSubmit}>
-      <p>current postion: {form.position}</p>
+
+<div className={styles.page}>
+
+
+  <form className={styles.form} onSubmit={handleSubmit}>
+    <p>Current position: {form.position}</p>
 
     <select
-    name="position"
-    value={form.position || ""}
-    onChange={handleChange}
-    required
-  >
-    <option value="">Select Position</option>
-    {positions.map((pos) => (
-      <option key={pos} value={pos}>
-        {pos}
-      </option>
-    ))}
+      name="position"
+      value={form.position || ""}
+      onChange={handleChange}
+      required
+    >
+      <option value="">Select Position</option>
+      {positions.map((pos) => (
+        <option key={pos} value={pos}>
+          {pos}
+        </option>
+      ))}
+    </select>
 
-    
-  </select>
-    
     <input
       name="department_id"
       value={form.department_id || ""}
       onChange={handleChange}
       placeholder="Department ID"
     />
+
     <input
       type="date"
       name="hire_date"
       value={form.hire_date || ""}
       onChange={handleChange}
     />
+
     <input
       name="salary"
       value={form.salary || ""}
@@ -85,6 +87,7 @@ export default function EditEmployee() {
     <button type="submit">Update Employee</button>
   </form>
 </div>
+
 
   );
 }

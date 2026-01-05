@@ -1,0 +1,140 @@
+/* Page wrapper */
+.page {
+  padding: 30px 30px;
+  color: #e8eef5;
+  min-height: 100vh;
+  height: 100%;
+  width:100%;
+  background-color:  #0d1424;
+}
+
+/* Page title */
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #5ba3e8;
+  margin-bottom: 20px;
+}
+
+/* Add employee button */
+.addBtn {
+  display: inline-block;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #357abd 0%, #4a90e2 100%);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 16px rgba(74, 144, 226, 0.35);
+}
+
+.addBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(74, 144, 226, 0.5);
+}
+
+/* Table wrapper */
+.tableWrapper {
+  margin-top: 20px;
+  background: #1a2330;
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid #2d4a6e;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  overflow-x: auto;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Header */
+.table thead {
+  background: #101a33;
+}
+
+.table th {
+  padding: 14px 16px;
+  background-color:  #101a33;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+  color: #5ba3e8;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border-bottom: 1px solid #2d4a6e;
+}
+
+
+
+/* Rows */
+.table tr {
+  transition: background 0.3s ease;
+}
+
+.table tbody tr:hover {
+  background: #182231;
+}
+
+/* Cells */
+.table td {
+  padding: 14px 16px;
+  font-size: 15px;
+  color: #e8eef5;
+  border-bottom: 1px solid #2d4a6e;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Action links */
+.actionLink {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5ba3e8;
+  background: #101a33;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1px solid #324e6b;
+  transition: all 0.3s ease;
+  padding: 1em;
+}
+
+.actionLink:hover {
+  background: #243447;
+  
+  border-color: #5ba3e8;
+}
+
+/* Delete button */
+.deleteBtn {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.deleteBtn:hover {
+  background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .actions {
+    flex-direction: column;
+  }
+}

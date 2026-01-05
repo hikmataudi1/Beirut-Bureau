@@ -1,0 +1,191 @@
+/* Page wrapper */
+.page {
+  padding: 30px 30px;
+  color: #e8eef5;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #0d1424;
+  font-family: Arial, sans-serif;
+}
+
+/* Page title */
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #5ba3e8;
+  margin-bottom: 20px;
+}
+
+/* Filters / Inputs */
+.filters label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 20px;
+}
+
+.filters input[type="month"] {
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #1f2937;
+  background: #0f172a;
+  color: #e8eef5;
+  font-size: 14px;
+}
+
+.filters input[type="month"]:focus {
+  outline: none;
+  border-color: #5ba3e8;
+  box-shadow: 0 0 0 2px rgba(91, 163, 232, 0.25);
+}
+
+/* Table wrapper */
+.tableWrapper {
+  margin-top: 20px;
+  background: #1a2330;
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid #2d4a6e;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  overflow-x: auto;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Table header */
+.table thead {
+  background: #101a33;
+}
+
+.table th {
+    background-color:  #101a33;
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+  color: #5ba3e8;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border-bottom: 1px solid #2d4a6e;
+}
+
+/* Table rows */
+.table tr {
+  transition: background 0.3s ease;
+}
+
+.table tbody tr:hover {
+  background: #182231;
+}
+
+/* Table cells */
+.table td {
+  padding: 14px 16px;
+  font-size: 15px;
+  color: #e8eef5;
+  border-bottom: 1px solid #2d4a6e;
+}
+
+/* Action buttons */
+.button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #357abd 0%, #4a90e2 100%);
+  color: #ffffff;
+}
+
+.button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+}
+
+/* Payroll calculation card */
+.calculationCard {
+  margin-top: 30px;
+  padding: 20px;
+  background: #111827;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  color: #e8eef5;
+}
+
+/* Card title */
+.calculationCard h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #5ba3e8;
+  margin-bottom: 20px;
+}
+
+/* Input fields in card */
+.calculationCard label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 14px;
+}
+
+.calculationCard input[type="number"] {
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #1f2937;
+  background: #0f172a;
+  color: #e8eef5;
+  font-size: 14px;
+}
+
+.calculationCard input[type="number"]:focus {
+  outline: none;
+  border-color: #5ba3e8;
+  box-shadow: 0 0 0 2px rgba(91, 163, 232, 0.25);
+}
+
+/* Result section */
+.result {
+  margin-top: 20px;
+  background: #1a2330;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.result p {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.result .downloadBtn {
+  margin-top: 10px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #357abd 0%, #4a90e2 100%);
+  color: #ffffff;
+}
+
+.result .downloadBtn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page {
+    padding: 20px;
+  }
+}

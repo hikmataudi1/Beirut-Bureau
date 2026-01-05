@@ -13,7 +13,7 @@ import {
   ArcElement
 } from "chart.js";
 import { Bar, Line, Pie } from "react-chartjs-2";
-import "./PerformanceOverviewDashboard.css";
+import styles from "./PerformanceOverviewDashboard.module.css";
 
 ChartJS.register(
   CategoryScale,
@@ -108,75 +108,80 @@ const PerformanceOverviewDashboard = () => {
   };
 
   return (
-    <div className="employee-dashboard">
-      <h2>Employee Performance Dashboard</h2>
+   
+<div className={styles.dashboard}>
+  <h2>Employee Performance Dashboard</h2>
 
-      <div className="controls">
-        <label>
-          Select Employee:{" "}
-          <select
-            value={selectedEmployee}
-            onChange={(e) => setSelectedEmployee(e.target.value)}
-          >
-            {employees.map(emp => (
-              <option key={emp.id} value={emp.id}>
-                {emp.id}
-              </option>
-            ))}
-          </select>
-        </label>
+  <div className={styles.controls}>
+    <label>
+      Select Employee:
+      <select
+        value={selectedEmployee}
+        onChange={(e) => setSelectedEmployee(e.target.value)}
+      >
+        {employees.map((emp) => (
+          <option key={emp.id} value={emp.id}>
+            {emp.id}
+          </option>
+        ))}
+      </select>
+    </label>
 
-        <label>
-          Month:{" "}
-          <input
-            type="month"
-            value={month}
-            onChange={(e) => setMonth(e.target.value)}
-          />
-        </label>
-      </div>
+    <label>
+      Month:
+      <input
+        type="month"
+        value={month}
+        onChange={(e) => setMonth(e.target.value)}
+      />
+    </label>
+  </div>
 
-      <div className="charts-row">
-        <div className="chart-container">
-          <h3>Attendance Hours</h3>
-          <Bar data={attendanceChartData} options={{ responsive: true }} />
-        </div>
-
-        <div className="chart-container">
-          <h3>Task Completion</h3>
-          <Bar data={taskChartData} options={{ responsive: true }} />
-        </div>
-
-        <div className="chart-container pie-chart">
-          <h3>Overall Performance</h3>
-          <Pie data={statusChartData} options={{ responsive: true, maintainAspectRatio: false }} />
-        </div>
-      </div>
-
-      <div className="table-container">
-        <h3>Task Details</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Task</th>
-              <th>Status</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {performance.tasks.map((t, idx) => (
-              <tr key={idx}>
-                <td>{t.title}</td>
-                <td>{t.status}</td>
-                <td>{t.start_date}</td>
-                <td>{t.end_date}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+  <div className={styles.chartsRow}>
+    <div className={styles.chartContainer}>
+      <h3>Attendance Hours</h3>
+      <Bar data={attendanceChartData} options={{ responsive: true }} />
     </div>
+
+    <div className={styles.chartContainer}>
+      <h3>Task Completion</h3>
+      <Bar data={taskChartData} options={{ responsive: true }} />
+    </div>
+
+    <div className={`${styles.chartContainer} ${styles.pieChart}`}>
+      <h3>Overall Performance</h3>
+      <Pie
+        data={statusChartData}
+        options={{ responsive: true, maintainAspectRatio: false }}
+      />
+    </div>
+  </div>
+
+  <div className={styles.tableContainer}>
+    <h3>Task Details</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Status</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {performance.tasks.map((t, idx) => (
+          <tr key={idx}>
+            <td>{t.title}</td>
+            <td className="status">{t.status}</td>
+            <td>{t.start_date}</td>
+            <td>{t.end_date}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
   );
 };
 
