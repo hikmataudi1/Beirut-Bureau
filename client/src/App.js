@@ -20,6 +20,7 @@ import { PaymentRequest } from "./pages/PaymentRequest/PaymentRequest";
 import AttendancesDashboard from "./pages/AttendancesPage/AttendancesDashboard";
 import AttendacesEdit from "./pages/AttendancesEdit/AttendacesEdit";
 
+
 import PayrollDashboard from "./pages/PayrollDashboard/PayrollDashboard";
 import PerformanceOverviewDashboard from "./pages/PerformanceOverviewDashboard/PerformanceOverviewDashboard";
 
@@ -33,12 +34,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<CitizenRegistration />} />
 
+
         {/* 🔒 App routes (WITH sidebar) */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<CertificateRequestsPage />} />
           <Route path="/request" element={<CertificateRequestsPage />} />
           <Route path="/newRequest" element={<NewRequest />} />
           
+
 
           <Route path="/employees" element={<EmployeeList />} />
           <Route path="/employees/add" element={<AddEmployee />} />
