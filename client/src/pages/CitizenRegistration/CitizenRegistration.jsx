@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./CitizenRegistration.module.css"; // ✅ CSS Module import
 
-const url = "http://localhost:8000/api";
-
 function CitizenRegistration() {
   const navigate = useNavigate();
 
@@ -49,19 +47,27 @@ function CitizenRegistration() {
   } = useForm({ resolver: yupResolver(schema) });
 
   // Submit handler
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const formattedData = {
       ...data,
       date_of_birth: data.date_of_birth.toISOString().split("T")[0],
     };
+    try {
+  await axios.post(
+    "http://127.0.0.1:8000/api/citizens",
+    formattedData,
+    { headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },}
+    
+  );
 
-    axios
-      .post(url + "/citizens", formattedData)
-      .then(() => {
-        toast.success("Registration Successful! Redirecting...");
-        setTimeout(() => navigate("/login"), 2000);
-      })
-      .catch((err) => toast.error(err.response?.data?.message || err.message));
+  toast.success("Registration Successful! Redirecting...");
+  setTimeout(() => navigate("/login"), 2000);
+} catch (err) {
+  toast.error(err.response?.data?.message || err.message);
+}
   };
 
   return (

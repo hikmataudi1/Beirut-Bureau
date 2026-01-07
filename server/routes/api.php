@@ -32,9 +32,10 @@ Route::post('/login', [CitizenController::class, 'login']);
 
 
 
-
 //middleware by kheirallah
-//Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [CitizenController::class, 'logout']);
+
 
     //kheirallah
         Route::get('/citizens', [CitizenController::class, 'index']);
@@ -96,4 +97,4 @@ Route::post('/login', [CitizenController::class, 'login']);
     Route::get('/payroll', [PayrollController::class, 'index']);
     Route::post('/payroll/{employee}/calculate', [PayrollController::class, 'calculate']);
     Route::get('/employee-performance/{id}', [PerformanceOverviewController::class, 'show']);
-//});
+});

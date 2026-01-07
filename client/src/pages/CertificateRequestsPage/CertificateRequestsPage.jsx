@@ -24,7 +24,10 @@ const  url = "http://localhost:8000/api";
     
     useEffect (()=>{
         if(user!==null){
-            axios.get(url+`/request/citizen/${user.citizenId}`)
+            axios.get(url+`/request/citizen/${user.citizenId}`,{ headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },})
             .then(res=>setRequests(res.data))
             .catch(err=>console.error(err));
               

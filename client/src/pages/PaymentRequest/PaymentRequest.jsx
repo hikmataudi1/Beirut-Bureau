@@ -16,7 +16,12 @@ export function PaymentRequest() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios.get(`${API_BASE}/citizens`).then(res => {setCitizens(res.data); console.log(res.data);
+    axios.get(`${API_BASE}/citizens`,{
+       headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },
+    }).then(res => {setCitizens(res.data); console.log(res.data);
      });
     
   }, []);
@@ -61,10 +66,14 @@ export function PaymentRequest() {
         payment_type:type,
         amount: parseFloat(amount),
         citizen_id: selectAll ? [] : selectedIds,
+        
       };
 
       console.log(payload);
-      await axios.post(`${API_BASE}/admin/property-tax`, payload);
+      await axios.post(`${API_BASE}/admin/property-tax`, payload,{ headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },});
       alert(
         `Payment created for ${selectAll ? "All" : selectedIds.length} successfully!`
       );

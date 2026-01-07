@@ -46,7 +46,12 @@ export function PaymentReview() {
   useEffect(() => {
     const fetchPropertyTaxes = async () => {
       try {
-        const response = await axios.get(`${API_BASE}/property-tax/${userId}`);
+        const response = await axios.get(`${API_BASE}/property-tax/${userId}`,{
+           headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },
+        });
         console.log(response.data.payments[0].status);
         setPropertyTaxes(response.data.payments);
         console.log(response.data.payments);
@@ -64,7 +69,10 @@ export function PaymentReview() {
       const response = await axios.post(`${API_BASE}/property-tax/pay`, {
         paymentId,
         citizen_id:userId,
-      });
+      },{ headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },});
 
         setPropertyTaxes((prev) =>
           prev.map((tax) =>

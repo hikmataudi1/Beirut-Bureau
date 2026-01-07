@@ -10,13 +10,21 @@ export default function EmployeeList() {
   const [employees, setEmployees] = useState([]);
 
   const loadEmployees = async () => {
-    const res = await axios.get(`${API_URL}/employees`);
+    const res = await axios.get(`${API_URL}/employees`,{
+       headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },
+    });
     setEmployees(res.data);
   };
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete employee?")) return;
-    await axios.delete(`${API_URL}/employees/${id}`);
+    await axios.delete(`${API_URL}/employees/${id}`,{ headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },});
     loadEmployees();
   };
 

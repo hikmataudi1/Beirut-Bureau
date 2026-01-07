@@ -19,25 +19,28 @@ import { PaymentReview } from "./pages/PaymentReview/PaymentReview";
 import { PaymentRequest } from "./pages/PaymentRequest/PaymentRequest";
 import AttendancesDashboard from "./pages/AttendancesPage/AttendancesDashboard";
 import AttendacesEdit from "./pages/AttendancesEdit/AttendacesEdit";
-
-
+import ProtectedRoute from "./components/ProtectedRoute";
+  import axios from 'axios';
 import PayrollDashboard from "./pages/PayrollDashboard/PayrollDashboard";
 import PerformanceOverviewDashboard from "./pages/PerformanceOverviewDashboard/PerformanceOverviewDashboard";
 
 function App() {
+
+
   return (
     <BrowserRouter>
       <Toaster />
-
+      
       <Routes>
         {/* 🔓 Public routes (NO sidebar) */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<CitizenRegistration />} />
 
 
+        <Route element={<ProtectedRoute />}>
         {/* 🔒 App routes (WITH sidebar) */}
         <Route element={<MainLayout />}>
-          <Route path="/" element={<CertificateRequestsPage />} />
+          <Route path="/" element={<CitizenRegistration />} />
           <Route path="/request" element={<CertificateRequestsPage />} />
           <Route path="/newRequest" element={<NewRequest />} />
           
@@ -58,9 +61,18 @@ function App() {
           <Route path="/payroll" element={<PayrollDashboard />} />
           <Route path="/performance" element={<PerformanceOverviewDashboard />} />
         </Route>
+      </Route>
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
+
+
+
+
+// logout login tokens
+//add missing pages
+//home page
+//protect routes

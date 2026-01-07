@@ -51,7 +51,10 @@ export function CitizenPermitRequest({ userId }) {
         data: formData
       };
 
-      await axios.post(`/api/citizens/${userId}/permits`, payload);
+      await axios.post(`/api/citizens/${userId}/permits`, payload,{ headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },});
       
       alert("Permit request submitted successfully!");
       // Reset form

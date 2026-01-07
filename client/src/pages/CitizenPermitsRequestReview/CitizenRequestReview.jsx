@@ -17,7 +17,12 @@ export function PermitRequestReview() {
   const fetchPendingPermits = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${url}/api/admin/permits/pending`);
+      const response = await axios.get(`${url}/api/admin/permits/pending`,{
+         headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },
+      });
       setRequests(response.data);
     } catch (error) {
       console.error("Error fetching permits:", error);
@@ -37,7 +42,10 @@ export function PermitRequestReview() {
       // API Call with the body format you specified
       await axios.put(`${url}/api/admin/permits/${permitId}`, {
         status: status
-      });
+      },{ headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },});
 
       // Remove the permit from the list upon success
       setRequests(prev => prev.filter(r => r.permit_id !== permitId));

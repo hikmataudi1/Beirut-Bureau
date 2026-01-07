@@ -26,7 +26,10 @@ export default function EditEmployee() {
   const [form, setForm] = useState({});
 
   useEffect(() => {
-    axios.get(`${API_URL}/employees/${id}`)
+    axios.get(`${API_URL}/employees/${id}`,{ headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },})
       .then(res => setForm(res.data));
   }, [id]);
 
@@ -36,7 +39,12 @@ export default function EditEmployee() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`${API_URL}/employees/${id}`, form);
+    await axios.put(`${API_URL}/employees/${id}`, form, {
+       headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },
+    });
     navigate("/employees");
   };
 

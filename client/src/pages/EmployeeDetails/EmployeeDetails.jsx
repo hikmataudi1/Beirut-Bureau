@@ -11,7 +11,12 @@ export default function EmployeeDetails() {
 
   useEffect(() => {
 
-    axios.get(`${API_URL}/employees/${id}`)
+    axios.get(`${API_URL}/employees/${id}`,{
+       headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },
+    })
       .then(res => setEmployee(res.data));
       console.log(employee);
 

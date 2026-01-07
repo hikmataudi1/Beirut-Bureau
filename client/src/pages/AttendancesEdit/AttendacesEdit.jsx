@@ -21,7 +21,10 @@ const AttendancesEdit = ({ attendance, onSave, onCancel }) => {
       await axios.put(`http://localhost:8000/api/attendance/${attendance.id}`, {
         check_in: formattedCheckIn,
         check_out: formattedCheckOut,
-      });
+      },{ headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },});
 
       // Calculate hours worked for frontend
       const hoursWorked = ((new Date(`1970-01-01T${formattedCheckOut}`) - new Date(`1970-01-01T${formattedCheckIn}`)) / 3600000).toFixed(2);

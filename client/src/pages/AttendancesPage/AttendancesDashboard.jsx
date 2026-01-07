@@ -17,7 +17,10 @@ const AttendancesDashboard = () => {
 
   const fetchEmployees = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/employees");
+      const res = await axios.get("http://localhost:8000/api/employees",{ headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },});
       setEmployees(res.data);
     } catch (err) {
       console.error(err);
@@ -27,7 +30,10 @@ const AttendancesDashboard = () => {
 
   const fetchAttendance = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/attendance");
+      const res = await axios.get("http://localhost:8000/api/attendance",{ headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },});
       setAttendance(res.data);
     } catch (err) {
       console.error(err);
@@ -54,7 +60,10 @@ const AttendancesDashboard = () => {
         check_in: updatedRecord.check_in,
         check_out: updatedRecord.check_out,
         hours_worked: updatedRecord.hours_worked,
-      });
+      },{ headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },});
       setAttendance(attendance.map((a) => (a.id === updatedRecord.id ? updatedRecord : a)));
       setEditRecord(null);
     } catch (err) {
@@ -67,7 +76,10 @@ const AttendancesDashboard = () => {
     if (!window.confirm("Are you sure you want to delete this record?")) return;
 
     try {
-      await axios.delete(`http://localhost:8000/api/attendance/${id}`);
+      await axios.delete(`http://localhost:8000/api/attendance/${id}`,{ headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },});
       setAttendance(attendance.filter((a) => a.id !== id));
     } catch (err) {
       console.error(err);

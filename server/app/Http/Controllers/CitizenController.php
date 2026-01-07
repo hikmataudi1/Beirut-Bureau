@@ -2,6 +2,7 @@
 // kheirallah
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Citizen;
@@ -37,8 +38,12 @@ class CitizenController extends Controller
             'contact' => $validated['contact'] ?? null,
             'date_of_birth' => $validated['date_of_birth'] ?? null,
         ]);
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
         return response()->json([
             'message' => 'Citizen registered successfully',
+            'token' => $token,
             'user' => $user,
             'citizen' => $citizen
         ], 201);
@@ -63,11 +68,11 @@ class CitizenController extends Controller
         }
 
         // Create token
-       // $token = $user->createToken('auth_token')->plainTextToken;
-
+     $token = $user->createToken('auth_token')->plainTextToken;
+      
         return response()->json([
             'message' => 'Login successful',
-            //'token' => $token,
+            'token' => $token,
             'role' => $user->role,
             'citizen' => $user->citizen
         ], 200);
@@ -97,6 +102,16 @@ class CitizenController extends Controller
             'citizen' => $citizen
         ], 200);
     }
+        public function logout(Request $request)
+    {
+        // Revoke the current token
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => 'Logged out successfully'
+        ]);
+    }
+    
     public function index()
     {
         // 🔒 Admin authentication (COMMENTED FOR NOW)

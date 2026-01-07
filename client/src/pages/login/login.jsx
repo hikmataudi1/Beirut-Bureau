@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import styles from "./Login.module.css"; // ✅ CSS Module
 import { useAuth } from "../../context/AuthContext";
 
+
 const url = "http://localhost:8000/api";
 
 function Login() {
@@ -26,21 +27,36 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+const onSubmit = async (val) => {
+  try {
+    const res = await axios.post(
+      "http://localhost:8000/api/login",
+      val,
+      {
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
 
-  const onSubmit = (val) => {
-    axios
-      .post(url + "/login", val)
-      .then((res) => {
-        let user = {
-          id: res.data.citizen.user_id,
-          citizenId: res.data.citizen.id,
-          role: res.data.role,
-        };
-        login(user, null);
-        console.log(user);
-      })
-      .catch((err) => console.log(err));
-  };
+    // Save token
+    localStorage.setItem("token", res.data.token);
+
+    // Save user (client-side only)
+    const user = {
+      id: res.data.citizen.user_id,
+      citizenId: res.data.citizen.id,
+      role: res.data.role,
+    };
+
+    login(user, res.data.token);
+
+    navigate("/payroll");
+  } catch (err) {
+    console.log(err.response?.data?.message || err.message);
+  }
+};
+
 
   // navigation to registration
   const handleReg = () => {

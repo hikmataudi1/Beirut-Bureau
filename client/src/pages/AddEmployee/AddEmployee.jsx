@@ -34,7 +34,10 @@ export default function AddEmployee() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(`${API_URL}/employees`, form);
+    await axios.post(`${API_URL}/employees`, form,{ headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },});
     navigate("/employees");
   };
 

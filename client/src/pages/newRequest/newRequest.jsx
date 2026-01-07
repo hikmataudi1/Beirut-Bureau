@@ -28,7 +28,10 @@ export default function NewRequest() {
         type:data.requestType,
     }
     console.log(formattedData);
-       axios.post(url+`/request/${user.citizenId}`,formattedData).then(res => console.log(res))
+       axios.post(url+`/request/${user.citizenId}`,formattedData,{ headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },}).then(res => console.log(res))
       .catch(err =>console.log(err));
     
   };

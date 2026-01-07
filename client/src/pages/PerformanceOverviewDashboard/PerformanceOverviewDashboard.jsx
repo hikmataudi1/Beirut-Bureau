@@ -41,7 +41,12 @@ const PerformanceOverviewDashboard = () => {
 
   useEffect(() => {
     // Fetch all employees for dropdown
-    axios.get("http://localhost:8000/api/employees").then(res => {
+    axios.get("http://localhost:8000/api/employees",{
+       headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },
+    }).then(res => {
         console.log(res.data)
       setEmployees(res.data);
       if (res.data.length > 0) setSelectedEmployee(res.data[0].id);
@@ -57,7 +62,10 @@ const PerformanceOverviewDashboard = () => {
   const fetchPerformance = async (employeeId, month) => {
     const res = await axios.get(
       `http://localhost:8000/api/employee-performance/${employeeId}`,
-      { params: { month } }
+      { params: { month } , headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },}
     );
     setPerformance(res.data);
   };

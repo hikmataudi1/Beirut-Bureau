@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+
 import {
 Home,
 CalendarDays,
@@ -13,7 +16,9 @@ LogOut,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext"; 
 import './Sidebar.css'
-    function Sidebar ()  {
+const API_URL = "http://localhost:8000/api";
+
+function Sidebar ()  {
     const { user, token, login, logout } = useAuth();
     const navigate = useNavigate();
     //get from usecontext , if null -> citizen
@@ -23,8 +28,15 @@ import './Sidebar.css'
     user.role = 'citizen';
 }
     
-    const handleLogout = () => {
-    navigate('/login');
+    const handleLogout = async () => {
+     const res = await axios.post(`${API_URL}/logout`,{},{
+       headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },
+    });
+    localStorage.removeItem("token");
+    navigate("/login");
     };
 
     return (

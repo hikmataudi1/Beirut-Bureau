@@ -3,6 +3,7 @@ import axios from "axios";
 import jsPDF from "jspdf";
 import styles from './PayrollDashboard.module.css';
 
+
 const PayrollDashboard = () => {
   const [month, setMonth] = useState(new Date().toISOString().slice(0, 7));
   const [payroll, setPayroll] = useState([]);
@@ -47,16 +48,25 @@ const downloadReceipt = (data) => {
   }, [month]);
 
   const fetchPayroll = async () => {
-    const res = await axios.get("http://localhost:8000/api/payroll", {
-      params: { month }
-    });
+      const res = await axios.get("http://localhost:8000/api/payroll", {
+    params: { month },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },
+  });
+
     setPayroll(res.data);
   };
 
   const calculatePayroll = async () => {
     const res = await axios.post(
       `http://localhost:8000/api/payroll/${selected.employee_id}/calculate`,
-      { month, bonus, deduction }
+      { month, bonus, deduction },
+      { headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      Accept: "application/json",
+    },}
     );
     setResult(res.data);
   };
