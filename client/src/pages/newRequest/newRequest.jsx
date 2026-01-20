@@ -5,6 +5,7 @@ import * as yup from "yup";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 import styles from "./NewRequest.module.css";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object({
   type: yup.string().required("Type is required"),
@@ -12,6 +13,8 @@ const schema = yup.object({
 });
 
 export default function NewRequest() {
+    const navigate = useNavigate();
+
   const { user } = useAuth();
  const  url = "http://localhost:8000/api";
   const {
@@ -31,7 +34,7 @@ export default function NewRequest() {
        axios.post(url+`/request/${user.citizenId}`,formattedData,{ headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
       Accept: "application/json",
-    },}).then(res => console.log(res))
+    },}).then(res => {console.log(res); navigate("/request");})
       .catch(err =>console.log(err));
     
   };

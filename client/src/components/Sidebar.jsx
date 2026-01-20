@@ -25,7 +25,7 @@ function Sidebar ()  {
     
 
     if (user && user.role === null) {
-    user.role = 'citizen';
+    user.role = 'Citizen';
 }
     
     const handleLogout = async () => {
@@ -53,10 +53,13 @@ function Sidebar ()  {
             {user && (
                 <>
                     {/* Citizen */}
-                    {user.role === 'Citizen' && (
+                    { (user.role === 'Citizen' ) && (
                         <>
-                            <Link to="/newRequest"><FilePlus2 size={18} /> Submit a New Request</Link>
-                            <Link to="#"><Wallet size={18} /> Placeholder for Citizen</Link>
+                            <Link to="/request"><FilePlus2 size={18} /> Certificate Requests</Link>
+                            <Link to="/permitrequest"><FilePlus2 size={18} /> Submit a New permit Request</Link>
+                            <Link to="/editprofile"><UsersRound size={18} /> Edit Profile</Link>
+                            
+
                         </>
                     )}
 
@@ -84,56 +87,108 @@ function Sidebar ()  {
                             <Link to="/attendances"><CalendarDays size={18} /> attendances</Link>
                             <Link to="/payroll"><CalendarDays size={18} /> payroll</Link>
                             <Link to="/performance"><CalendarDays size={18} /> performance</Link>
-                            <Link to="/newRequest"><FilePlus2 size={18} /> Submit a New Request</Link>
+                            <Link to="/request"><FilePlus2 size={18} /> Certificate Requests</Link>
+                            <Link to="/permitrequest"><FilePlus2 size={18} /> Submit a New permit Request</Link>
+                            <Link to="/permitreview"><FilePlus2 size={18} /> Submit a New permit Request</Link>
+                            <Link to="/paymentrequest"><FilePlus2 size={18} /> Submit a New permit Request</Link>
+                            <Link to="/paymentreview"><FilePlus2 size={18} /> Submit a New permit Request</Link>
+                            <Link to="/paymentreview"><UsersRound size={18} />manage users</Link>
+                            <Link to="/projectmanagement"><FilePlus2 size={18} />  Project Management</Link>
+                            <Link to="/managetasks"><FilePlus2 size={18} />  Project Management</Link>
+                            <Link to="/createtask"><FilePlus2 size={18} />  Project creation</Link>
+                            <Link to="/createproject"><FilePlus2 size={18} />  Project creation</Link>
+                             <Link to="/requestmanagement"><CalendarDays size={18} /> manage citizens requests</Link>
+                            <Link to="/permitmanagement"><CalendarDays size={18} /> manage citizens permits</Link>
+                            <Link to="/userslist"><CalendarDays size={18} /> manage users</Link>
+                            
                         </>
                     )}
 
                     {/* Mayor */}
                     {user.role === 'Mayor' && (
                         <>
-                            <Link to="#"><UsersRound size={18} /> Placeholder for Mayor</Link>
+                              <Link to="/employees"><FilePlus2 size={18} /> Employees Management</Link>
+                            <Link to="/attendances"><CalendarDays size={18} /> attendances</Link>
+                            <Link to="/payroll"><CalendarDays size={18} /> payroll</Link>
+                            <Link to="/performance"><CalendarDays size={18} /> performance</Link>
+                            <Link to="/request"><FilePlus2 size={18} /> Certificate Requests</Link>
+                            <Link to="/permitrequest"><FilePlus2 size={18} /> Submit a New permit Request</Link>
+                            <Link to="/permitreview"><FilePlus2 size={18} /> Submit a New permit Request</Link>
+                            <Link to="/paymentrequest"><FilePlus2 size={18} /> Submit a New permit Request</Link>
+                            <Link to="/paymentreview"><FilePlus2 size={18} /> Submit a New permit Request</Link>
+                            <Link to="/projectmanagement"><FilePlus2 size={18} />  Project Management</Link>
+                            <Link to="/managetasks"><FilePlus2 size={18} />  Project Management</Link>
+                            <Link to="/createtask"><FilePlus2 size={18} />  Project creation</Link>
+                            <Link to="/createproject"><FilePlus2 size={18} />  Project creation</Link>
+                             <Link to="/requestmanagement"><CalendarDays size={18} /> manage citizens requests</Link>
+                            <Link to="/permitmanagement"><CalendarDays size={18} /> manage citizens permits</Link>
                         </>
                     )}
 
                     {/* Municipal Director */}
                     {user.role === 'Municipal Director' && (
                         <>
-                            <Link to="#"><FileText size={18} /> Placeholder for Municipal Director</Link>
+                              <Link to="/employees"><FilePlus2 size={18} /> Employees Management</Link>
+                            <Link to="/attendances"><CalendarDays size={18} /> attendances</Link>
+                            <Link to="/payroll"><CalendarDays size={18} /> payroll</Link>
+                            <Link to="/performance"><CalendarDays size={18} /> performance</Link>
+                            <Link to="/request"><FilePlus2 size={18} /> Certificate Requests</Link>
+                            <Link to="/permitrequest"><FilePlus2 size={18} /> Submit a New permit Request</Link>
+                            <Link to="/permitreview"><FilePlus2 size={18} /> Submit a New permit Request</Link>
+                            <Link to="/paymentrequest"><FilePlus2 size={18} /> Submit a New permit Request</Link>
+                            <Link to="/paymentreview"><FilePlus2 size={18} /> Submit a New permit Request</Link>
+                            <Link to="/projectmanagement"><FilePlus2 size={18} />  Project Management</Link>
+                            <Link to="/managetasks"><FilePlus2 size={18} />  Project Management</Link>
+                            <Link to="/createtask"><FilePlus2 size={18} />  Project creation</Link>
+                            <Link to="/createproject"><FilePlus2 size={18} />  Project creation</Link>
+                             <Link to="/requestmanagement"><CalendarDays size={18} /> manage citizens requests</Link>
+                            <Link to="/permitmanagement"><CalendarDays size={18} /> manage citizens permits</Link>
+                            
                         </>
                     )}
 
                     {/* Finance Officer */}
                     {user.role === 'Finance Officer' && (
                         <>
-                            <Link to="#"><Wallet size={18} /> Placeholder for Finance Officer</Link>
+                             <Link to="/paymentreview"><FilePlus2 size={18} /> Submit a New permit Request</Link>
+                              <Link to="/payroll"><CalendarDays size={18} /> payroll</Link>
                         </>
                     )}
 
                     {/* Urban Planner */}
                     {user.role === 'Urban Planner' && (
                         <>
-                            <Link to="#"><Map size={18} /> Placeholder for Urban Planner</Link>
+                            <Link to="/projectmanagement"><FilePlus2 size={18} />  Project Management</Link>
+                            <Link to="/managetasks"><FilePlus2 size={18} />  Project Management</Link>
+                            <Link to="/createtask"><FilePlus2 size={18} />  Project creation</Link>
+                            <Link to="/createproject"><FilePlus2 size={18} />  Project creation</Link>
                         </>
                     )}
 
                     {/* Project Manager */}
                     {user.role === 'Project Manager' && (
                         <>
-                            <Link to="#"><FilePlus2 size={18} /> Placeholder for Project Manager</Link>
+                            <Link to="/projectmanagement"><FilePlus2 size={18} />  Project Management</Link>
+                            <Link to="/managetasks"><FilePlus2 size={18} />  Project Management</Link>
+                            <Link to="/createtask"><FilePlus2 size={18} />  Project creation</Link>
+                            <Link to="/createproject"><FilePlus2 size={18} />  Project creation</Link>
                         </>
                     )}
 
                     {/* Clerk */}
                     {user.role === 'Clerk' && (
                         <>
-                            <Link to="#"><FileText size={18} /> Placeholder for Clerk</Link>
+                              <Link to="/requestmanagement"><CalendarDays size={18} /> manage citizens requests</Link>
+                            <Link to="/permitmanagement"><CalendarDays size={18} /> manage citizens permits</Link>
                         </>
                     )}
 
                     {/* Staff */}
                     {user.role === 'Staff' && (
                         <>
-                            <Link to="#"><CalendarDays size={18} /> Placeholder for Staff</Link>
+                            
+                            <Link to="/requestmanagement"><CalendarDays size={18} /> manage citizens requests</Link>
+                            <Link to="/permitmanagement"><CalendarDays size={18} /> manage citizens permits</Link>
                         </>
                     )}
                 </>

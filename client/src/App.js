@@ -20,9 +20,17 @@ import { PaymentRequest } from "./pages/PaymentRequest/PaymentRequest";
 import AttendancesDashboard from "./pages/AttendancesPage/AttendancesDashboard";
 import AttendacesEdit from "./pages/AttendancesEdit/AttendacesEdit";
 import ProtectedRoute from "./components/ProtectedRoute";
+import EditProfile from "./pages/EditProfile/EditProfile"
   import axios from 'axios';
 import PayrollDashboard from "./pages/PayrollDashboard/PayrollDashboard";
 import PerformanceOverviewDashboard from "./pages/PerformanceOverviewDashboard/PerformanceOverviewDashboard";
+import UsersList from "./pages/UsersList/UsersList";
+import ManageRequests from "./pages/ManageRequests/ManageRequests";
+import ManagePermits from "./pages/ManagePermits/ManagePermits";
+import CreateProject from "./pages/CreateProject/CreateProject";
+import ManageProjects from "./pages/ManageProjects/ManageProjects";
+import CreateTask from "./pages/CreateTask/CreateTask";
+import ManageTasks from "./pages/ManageTasks/ManageTasks";
 
 function App() {
 
@@ -43,8 +51,15 @@ function App() {
           <Route path="/" element={<CitizenRegistration />} />
           <Route path="/request" element={<CertificateRequestsPage />} />
           <Route path="/newRequest" element={<NewRequest />} />
+          <Route path="/Editprofile" element={<EditProfile />} />
           
-
+          <Route path="/userslist" element={<UsersList />} />
+          <Route path="/requestmanagement" element={<ManageRequests />} />
+          <Route path="/permitmanagement" element={<ManagePermits />} />
+          <Route path="/createproject" element={<CreateProject />} />
+          <Route path="/projectmanagement" element={<ManageProjects />} />
+          <Route path="/createtask" element={<CreateTask />} />
+          <Route path="/managetasks" element={<ManageTasks />} />
 
           <Route path="/employees" element={<EmployeeList />} />
           <Route path="/employees/add" element={<AddEmployee />} />
@@ -72,7 +87,3 @@ export default App;
 
 
 
-// logout login tokens
-//add missing pages
-//home page
-//protect routes

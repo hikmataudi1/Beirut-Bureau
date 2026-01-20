@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import * as yup from "yup";
@@ -50,9 +51,10 @@ const onSubmit = async (val) => {
     };
 
     login(user, res.data.token);
-
+    toast.success("Registration Successful! Redirecting...");
     navigate("/payroll");
   } catch (err) {
+     toast.error(err.response?.data?.message || err.message);
     console.log(err.response?.data?.message || err.message);
   }
 };

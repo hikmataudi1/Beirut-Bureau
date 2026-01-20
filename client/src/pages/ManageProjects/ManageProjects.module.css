@@ -1,0 +1,68 @@
+.container {
+  max-width: 1200px;
+  margin: 5rem auto;
+  padding: 24px;
+  background: #111827;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  color: #e8eef5;
+}
+
+h2 {
+  text-align: center;
+  color: #5ba3e8;
+  margin-bottom: 20px;
+}
+
+.projectTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.projectTable th,
+.projectTable td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #2d4a6e;
+  font-size: 14px;
+}
+
+.projectTable th {
+  color: #5ba3e8;
+}
+
+.projectTable tbody tr:hover {
+  background: #182231;
+}
+
+button {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-right: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.statusBtn {
+  background: #facc15;
+  color: #111827;
+}
+
+.deleteBtn {
+  background: #ef4444;
+  color: #fff;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+  .projectTable td,
+  .projectTable th {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+}
