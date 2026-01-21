@@ -115,4 +115,22 @@ class ProjectController extends Controller
 
         return response()->json($projects, 200);
     }
+
+    public function destroy($projectId)
+{
+    // Admin authentication (optional for now)
+    // if (auth()->user()->role !== 'admin') {
+    //     return response()->json(['message' => 'Unauthorized'], 403);
+    // }
+
+    $project = Project::find($projectId);
+
+    if (!$project) {
+        return response()->json(['message' => 'Project not found'], 404);
+    }
+
+    $project->delete();
+
+    return response()->json(['message' => 'Project deleted successfully'], 200);
+}
 }

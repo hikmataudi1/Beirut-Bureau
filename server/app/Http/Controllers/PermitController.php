@@ -156,4 +156,21 @@ class PermitController extends Controller
 
         return response()->json($result, 200);
     }
+
+    // Delete a specific permit
+public function destroy($permitId)
+{
+    $permit = Permit::find($permitId);
+
+    if (!$permit) {
+        return response()->json(['message' => 'Permit not found'], 404);
+    }
+
+    $permit->delete();
+
+    return response()->json([
+        'message' => 'Permit deleted successfully'
+    ], 200);
+}
+
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { FilePlus2, Send, Loader2 } from 'lucide-react';
 import './CitizenPermitRequest.css';
-
+import { useAuth } from "../../context/AuthContext"; 
   const url = "http://localhost:8000";
 const PERMIT_TYPES = {
   business: ['business_name', 'location', 'owner_name'],
@@ -12,6 +12,7 @@ const PERMIT_TYPES = {
 };
 
 export function CitizenPermitRequest({ userId }) {
+  const { user, token, login, logout } = useAuth();
   const [type, setType] = useState('');
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -51,7 +52,7 @@ export function CitizenPermitRequest({ userId }) {
         data: formData
       };
 
-      await axios.post(`http://localhost:8000/api/citizens/${userId}/permits`, payload,{ headers: {
+      await axios.post(`http://localhost:8000/api/citizens/${user.citizenId}/permits`, payload,{ headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
       Accept: "application/json",
     },});

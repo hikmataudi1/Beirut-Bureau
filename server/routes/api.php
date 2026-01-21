@@ -39,16 +39,23 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //kheirallah
         Route::get('/citizens', [CitizenController::class, 'index']);
+        Route::get('/citizens/users', [CitizenController::class, 'getAllUsers']);
+        Route::delete('/citizens/users/{id}', [CitizenController::class, 'deleteUser']);
         Route::put('/citizens/update/{citizenId}', [CitizenController::class, 'update']);
         //permit routes
         Route::post('/citizens/{id}/permits', [PermitController::class, 'store']);
         Route::get('/citizens/{id}/permits', [PermitController::class, 'getCitizenPermits']);
         Route::put('/admin/permits/{id}', [PermitController::class, 'decide']);
         Route::get('/admin/permits/pending', [PermitController::class, 'getPending']);
+        Route::delete('/permits/{id}', [PermitController::class, 'destroy']);
         //request routes
         Route::get('/request/citizen/{citizenId}', [RequestController::class, 'getCitizenRequests']);
+        Route::get('/requests', [RequestController::class, "index"]);
+        Route::put('/requests/{id}', [RequestController::class, "update"]);
         Route::post('/request/{citizenId}', [RequestController::class, 'store']);
-        Route::put('/request/status/{id}', [RequestController::class, 'updateStatus']);
+        Route::patch('/request/status/{id}', [RequestController::class, 'updateStatus']);
+        Route::delete('/requests/{id}', [RequestController::class, 'destroy']);
+        
         // Payments routes
         Route::get('/property-tax/{citizenId}', [PaymentController::class, 'getPropertyTax']);
         Route::post('/property-tax/pay', [PaymentController::class, 'pay']);
@@ -60,6 +67,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/admin/projects/{id}/status', [ProjectController::class, 'updateStatus']);
         Route::get('/projects', [ProjectController::class, 'index']);
         Route::get('/projects/{id}', [ProjectController::class, 'show']);
+        Route::delete('/projects/{id}', [ProjectController::class, 'destroy']);
+
         // Departments routes
         Route::post('/admin/departments', [DepartmentController::class, 'store']);
         Route::put('/admin/departments/{id}', [DepartmentController::class, 'update']);
@@ -71,9 +80,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/tasks/{id}/status', [TaskController::class, 'updateStatus']);
         Route::get('/projects/{projectId}/tasks', [TaskController::class, 'getByProject']);
         Route::get('/employees/{employeeId}/tasks', [TaskController::class, 'getByEmployee']);
+        Route::get('/tasks', [TaskController::class, 'index']); // get all tasks
+        Route::delete('/tasks/{id}', [TaskController::class, 'destroy']); // delete task
 
-
-    //by yehya
+    //by yehya 
     //service requests routes
     Route::apiResource('request', RequestController::class);
     //Route::get('/serviceRequest/citizen/{citizenId}',[ServiceRequestController::class,'getByCitizen'] );

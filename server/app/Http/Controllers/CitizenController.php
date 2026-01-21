@@ -82,10 +82,10 @@ class CitizenController extends Controller
     {
         $citizen = Citizen::findOrFail($citizenId);
 
-        // Check: Is the logged-in user allowed to edit this profile?
-        // if ($request->user()->id !== $citizen->user_id) {
-        //     return response()->json(['message' => 'Unauthorized'], 403);
-        // }
+       
+        if ($request->user()->id !== $citizen->user_id) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
 
         // Validate
         $validated = $request->validate([
@@ -125,4 +125,37 @@ class CitizenController extends Controller
 
         return response()->json($citizens, 200);
     }
+
+    public function getAllUsers()
+{
+    // Retrieve all users
+    $users = User::all();
+
+    return response()->json([
+        'message' => 'All users retrieved successfully',
+        'users' => $users
+    ], 200);
+}
+
+public function deleteUser(Request $request, $id)
+{
+    // Find the user or fail
+    $user = User::findOrFail($id);
+
+    // Optional: prevent deleting yourself
+    if ($request->user()->id === $user->id) {
+        return response()->json(['message' => 'You cannot delete yourself'], 403);
+    }
+
+    // Optional: add authorization check (admin only)
+    // if (!$request->user()->isAdmin()) {
+    //     return response()->json(['message' => 'Unauthorized'], 403);
+    // }
+
+    $user->delete();
+
+    return response()->json([
+        'message' => 'User deleted successfully'
+    ], 200);
+}
 }

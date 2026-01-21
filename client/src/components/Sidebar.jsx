@@ -83,19 +83,20 @@ function Sidebar ()  {
                     {/* Admin */}
                     {user.role === 'Admin' && (
                         <>
+                              <Link to="/editprofile"><UsersRound size={18} /> Edit Profile</Link>
                             <Link to="/employees"><FilePlus2 size={18} /> Employees Management</Link>
                             <Link to="/attendances"><CalendarDays size={18} /> attendances</Link>
                             <Link to="/payroll"><CalendarDays size={18} /> payroll</Link>
                             <Link to="/performance"><CalendarDays size={18} /> performance</Link>
                             <Link to="/request"><FilePlus2 size={18} /> Certificate Requests</Link>
                             <Link to="/permitrequest"><FilePlus2 size={18} /> Submit a New permit Request</Link>
-                            <Link to="/permitreview"><FilePlus2 size={18} /> Submit a New permit Request</Link>
-                            <Link to="/paymentrequest"><FilePlus2 size={18} /> Submit a New permit Request</Link>
-                            <Link to="/paymentreview"><FilePlus2 size={18} /> Submit a New permit Request</Link>
-                            <Link to="/paymentreview"><UsersRound size={18} />manage users</Link>
+                            <Link to="/permitreview"><FilePlus2 size={18} /> review permits</Link>
+                            <Link to="/paymentrequest"><FilePlus2 size={18} /> Payment Request</Link>
+                           
+                            <Link to="/paymentreview"><UsersRound size={18} />manage payments</Link>
                             <Link to="/projectmanagement"><FilePlus2 size={18} />  Project Management</Link>
-                            <Link to="/managetasks"><FilePlus2 size={18} />  Project Management</Link>
-                            <Link to="/createtask"><FilePlus2 size={18} />  Project creation</Link>
+                            <Link to="/managetasks"><FilePlus2 size={18} />  Task Management</Link>
+                            <Link to="/createtask"><FilePlus2 size={18} />  task creation</Link>
                             <Link to="/createproject"><FilePlus2 size={18} />  Project creation</Link>
                              <Link to="/requestmanagement"><CalendarDays size={18} /> manage citizens requests</Link>
                             <Link to="/permitmanagement"><CalendarDays size={18} /> manage citizens permits</Link>

@@ -2,9 +2,11 @@ import { jsPDF } from "jspdf";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./PaymentReview.module.css"
+import { useAuth } from "../../context/AuthContext"; 
 const API_BASE = "http://localhost:8000/api";
 
 const generateReceipt = async (paymentId) => {
+  
   try {
     const response = await axios.get(`${API_BASE}/payments/${paymentId}`);
     const payment = response.data;
@@ -40,13 +42,16 @@ const generateReceipt = async (paymentId) => {
 
 
 export function PaymentReview() {
-  const userId = 1; 
+  const { user, token, login, logout } = useAuth();
+  
   const [propertyTaxes, setPropertyTaxes] = useState([]);
 
   useEffect(() => {
     const fetchPropertyTaxes = async () => {
       try {
-        const response = await axios.get(`${API_BASE}/property-tax/${userId}`,{
+        if(!user?.citizenId) return;
+          console.log(user.citizenId);
+        const response = await axios.get(`${API_BASE}/property-tax/${user.citizenId}`,{
            headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
       Accept: "application/json",
@@ -55,20 +60,20 @@ export function PaymentReview() {
         console.log(response.data.payments[0].status);
         setPropertyTaxes(response.data.payments);
         console.log(response.data.payments);
-        
+      
       } catch (error) {
         console.error("Error fetching property taxes:", error);
       }
     };
 
     fetchPropertyTaxes();
-  }, [userId]);
+  }, [user]);
 
   const payTax = async (paymentId) => {
     try {
       const response = await axios.post(`${API_BASE}/property-tax/pay`, {
         paymentId,
-        citizen_id:userId,
+        citizen_id:user.citizenId,
       },{ headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
       Accept: "application/json",
@@ -117,7 +122,7 @@ export function PaymentReview() {
       <tbody>
         {propertyTaxes.map((tax) => (
           <tr key={tax.id}>
-            <td>${tax.amount.toFixed(2)}</td>
+            <td>${tax.amount}</td>
             <td>{tax.payment_type}</td>
             <td>{tax.date ? new Date(tax.date).toLocaleString() : "-"}</td>
             <td className={tax.status === "PAID" ? styles.paid : styles.unpaid}>

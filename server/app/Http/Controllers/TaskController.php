@@ -118,4 +118,38 @@ class TaskController extends Controller
             'tasks'       => $tasks
         ], 200);
     }
+
+    // ADMIN: Get all tasks (index)
+public function index()
+{
+    // Optionally, you can restrict to admin only
+    // if (auth()->user()->role !== 'admin') {
+    //     return response()->json(['message' => 'Unauthorized'], 403);
+    // }
+
+    $tasks = Task::with(['project', 'assignee'])
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return response()->json($tasks, 200);
+}
+
+// ADMIN: Delete a task
+public function destroy($taskId)
+{
+    // Optionally, restrict to admin
+    // if (auth()->user()->role !== 'admin') {
+    //     return response()->json(['message' => 'Unauthorized'], 403);
+    // }
+
+    $task = Task::find($taskId);
+    if (!$task) {
+        return response()->json(['message' => 'Task not found'], 404);
+    }
+
+    $task->delete();
+
+    return response()->json(['message' => 'Task deleted successfully'], 200);
+}
+
 }
