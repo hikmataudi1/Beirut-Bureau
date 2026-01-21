@@ -84,7 +84,7 @@ export function PaymentReview() {
             tax.id === paymentId
               ? {
                   ...tax,
-                  status: "PAID",
+                  status: "completed",
                   date: response.data.paidAt,
                 }
               : tax
@@ -129,7 +129,7 @@ export function PaymentReview() {
               {tax.status}
             </td>
             <td>
-              {tax.status === "UNPAID" ? (
+              {tax.status === "pending" ? (
                 <button
                   className={styles.payBtn}
                   onClick={() => payTax(tax.id)}
@@ -138,7 +138,7 @@ export function PaymentReview() {
                 </button>
               ) : (
                 <>
-                  <span>PAID</span>
+                  
                   <br />
                   <button
                     className={styles.receiptBtn}

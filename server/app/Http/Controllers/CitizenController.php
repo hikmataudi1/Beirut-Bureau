@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Citizen;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\PasswordChangedMail;
+use App\Mail\CitizenRegisteredMail;
+use Illuminate\Support\Facades\Mail;
 
 class CitizenController extends Controller
 {
@@ -40,7 +43,7 @@ class CitizenController extends Controller
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
-
+        Mail::to($user->email)->send(new CitizenRegisteredMail($user));
         return response()->json([
             'message' => 'Citizen registered successfully',
             'token' => $token,
@@ -158,4 +161,39 @@ public function deleteUser(Request $request, $id)
         'message' => 'User deleted successfully'
     ], 200);
 }
+
+public function updatePassword(Request $request, $userId)
+{
+    $user = User::findOrFail($userId);
+
+    // 🔒 Authentication check (COMMENTED FOR NOW)
+    // if ($request->user()->id !== $user->id) {
+    //     return response()->json(['message' => 'Unauthorized'], 403);
+    // }
+
+    // Validate input
+    $validated = $request->validate([
+        'current_password' => 'required|string',
+        'new_password'     => 'required|string|min:6|confirmed',
+    ]);
+
+    //Check current password
+    if (!Hash::check($validated['current_password'], $user->password)) {
+        return response()->json([
+            'message' => 'Current password is incorrect'
+        ], 400);
+    }
+
+    //Update password
+    $user->password = Hash::make($validated['new_password']);
+    $user->save();
+
+    //Send email notification
+    Mail::to($user->email)->send(new PasswordChangedMail($user));
+
+    return response()->json([
+        'message' => 'Password updated successfully'
+    ], 200);
+}
+
 }

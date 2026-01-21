@@ -47,9 +47,7 @@ function Sidebar ()  {
                 <h4>Municipal Management System</h4>
             </div>
             <div className="sidebar-menu">
-            <Link to="/"><Home size={18} /> Home</Link>
-            <Link to="/events"><CalendarDays size={18} /> Events</Link>
-
+            
             {user && (
                 <>
                     {/* Citizen */}
